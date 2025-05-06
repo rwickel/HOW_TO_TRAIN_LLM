@@ -29,7 +29,7 @@ The script logs and saves all results, including correct and incorrect predictio
 {
   "question": "If there are 3 cars and each car has 4 tires, how many tires are there in total?",
   "answer": "Each car has 4 tires. So for 3 cars: 3 * 4 = 12. #### 12"
-}
+}```
 ---
 
 ##  Files
