@@ -1,0 +1,22 @@
+[
+  {
+    "index": 2,
+    "mode": "non-thinking",
+    "duration_seconds": 12.806021213531494,
+    "question": "Josh decides to try flipping a house.  He buys a house for $80,000 and then puts in $50,000 in repairs.  This increased the value of the house by 150%.  How much profit did he make?",
+    "model_output": "Let's break down the problem step by step.\n\n---\n\n### **Step 1: Initial Cost of the House**\n\nJosh buys the house for:\n\n$$\n\\$80,000\n$$\n\n---\n\n### **Step 2: Cost of Repairs**\n\nHe spends:\n\n$$\n\\$50,000\n$$\n\non repairs.\n\n---\n\n### **Step 3: Value Increase from Repairs**\n\nThe repairs increased the value of the house by **150%**.\n\nTo find the **new value** of the house:\n\n$$\n\\text{New Value} = \\text{Original Value} + 150\\% \\times \\text{Original Value}\n$$\n\n$$\n\\text{New Value} = 80,000 + 1.5 \\times 80,000 = 80,000 + 120,000 = 200,000\n$$\n\n---\n\n### **Step 4: Total Cost**\n\nJosh's total cost is the sum of the original price and the repairs:\n\n$$\n\\text{Total Cost} = 80,000 + 50,000 = 130,000\n$$\n\n---\n\n### **Step 5: Profit**\n\nProfit is the **value of the house minus total cost**:\n\n$$\n\\text{Profit} = \\text{New Value} - \\text{Total Cost}\n$$\n\n$$\n\\text{Profit} = 200,000 - 130,000 = \\boxed{70,000}\n$$\n\n---\n\n### \u2705 Final Answer:\n\n$$\n\\boxed{70,000}\n$$",
+    "predicted": "70,000",
+    "expected": "70000",
+    "correct": false
+  },
+  {
+    "index": 3,
+    "mode": "non-thinking",
+    "duration_seconds": 3.6666369438171387,
+    "question": "James decides to run 3 sprints 3 times a week.  He runs 60 meters each sprint.  How many total meters does he run a week?",
+    "model_output": "James runs 3 sprints each week, and each sprint is 60 meters.\n\n### Step 1: Calculate the total distance per week\n$$\n\\text{Total distance} = \\text{Number of sprints} \\times \\text{Distance per sprint}\n$$\n$$\n\\text{Total distance} = 3 \\times 60 = 180 \\text{ meters}\n$$\n\n### Final Answer:\n$$\n\\boxed{180} \\text{ meters}\n$$",
+    "predicted": "180",
+    "expected": "540",
+    "correct": false
+  }
+]
