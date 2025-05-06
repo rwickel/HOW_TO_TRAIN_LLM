@@ -27,7 +27,7 @@ The script logs and saves all results, including correct and incorrect predictio
 Install dependencies:
 ```bash
 pip install torch transformers
-
+```
 ---
 ##  Run
     python evaluate_gsm8k_qwen.py --limit 50
