@@ -1,4 +1,4 @@
-# Qwen3-1.7B Fine-Tuning Project
+# Qwen3-1.7B Fine-Tuning Example
 
 This project fine-tunes the Qwen3-1.7B language model on the OpenAssistant-Guanaco dataset using Hugging Face's Transformers and TRL libraries.
 
