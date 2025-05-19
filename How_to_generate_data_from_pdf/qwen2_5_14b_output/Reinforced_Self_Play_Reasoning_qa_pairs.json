@@ -1,0 +1,354 @@
+[
+  {
+    "question": "What is the main goal of Absolute Zero Reasoner (AZR)?",
+    "answer": "The main goal of AZR is to enable a single model to propose tasks that maximize its own learning progress and improve reasoning capabilities without relying on any external data or human supervision (see Reinforced_Self_Play_Reasoning, Introduction)."
+  },
+  {
+    "question": "How does Absolute Zero Reasoner achieve self-evolution in training?",
+    "answer": "AZR achieves self-evolution by using a code executor to validate proposed reasoning tasks and verify answers, serving as an unified source of verifiable reward to guide its learning process (see Reinforced_Self_Play_Reasoning, Introduction)."
+  },
+  {
+    "question": "What is the performance benchmark for AZR?",
+    "answer": "AZR achieves state-of-the-art performance on coding and mathematical reasoning tasks without any external data or human-defined queries, surpassing models trained on tens of thousands of expert-labeled in-domain examples (see Reinforced_Self_Play_Reasoning, Introduction)."
+  },
+  {
+    "question": "What is the significance of AZR's approach to reinforcement learning?",
+    "answer": "AZR's approach addresses the limitations of existing RLVR methods by eliminating the need for manually curated collections of questions and answers, thus overcoming scalability issues related to long-term reliance on human supervision (see Reinforced_Self_Play_Reasoning, Introduction)."
+  },
+  {
+    "question": "How does AZR demonstrate its effectiveness in different model scales?",
+    "answer": "AZR demonstrates that it can be effectively applied across various model scales and is compatible with multiple model classes, showcasing its versatility and robustness (see Reinforced_Self_Play_Reasoning, Introduction)."
+  },
+  {
+    "question": "What is the main goal of Reinforcement Learning with Verifiable Rewards (RLVR) in the context of Reinforced_Self_Play_Reasoning?",
+    "answer": "The main goal of RLVR is to enable large language models to improve their reasoning capabilities by using outcome-based feedback, allowing for large-scale reinforcement learning over vast task datasets without explicitly imitating intermediate reasoning steps (see Reinforced_Self_Play_Reasoning page 2)."
+  },
+  {
+    "question": "What are the limitations of current RLVR methods as described in Reinforced_Self_Play_Reasoning?",
+    "answer": "Current RLVR methods still depend heavily on expertly curated distributions of reasoning question-answer pairs, which raises concerns about long-term scalability and the ability for AI systems to autonomously learn beyond human-designed tasks (see Reinforced_Self_Play_Reasoning page 2)."
+  },
+  {
+    "question": "What is the Absolute Zero paradigm introduced in Reinforced_Self_Play_Reasoning?",
+    "answer": "The Absolute Zero paradigm is a new approach for reasoning models that enables self-evolution through self-play without relying on external data, allowing agents to define and solve tasks autonomously (see Reinforced_Self_Play_Reasoning page 2)."
+  },
+  {
+    "question": "How does the Absolute Zero Reasoner (AZR) operate in the context of coding tasks?",
+    "answer": "The AZR constructs three types of coding tasks: inferring and reasoning about one particular element in a program, input, output triplet, corresponding to induction, abduction, and deduction modes of reasoning. It operates within an environment that validates task integrity and provides verifiable feedback for stable training (see Reinforced_Self_Play_Reasoning page 2)."
+  },
+  {
+    "question": "What is the significance of AZR's performance in diverse reasoning tasks according to Reinforced_Self_Play_Reasoning?",
+    "answer": "AZR demonstrates remarkable capabilities across various reasoning tasks, achieving competitive performance in mathematics and establishing a new state-of-the-art performance in coding tasks without any in-distribution data (see Reinforced_Self_Play_Reasoning page 2)."
+  },
+  {
+    "question": "What is the primary objective of the Absolute Zero loop as described in Reinforced_Self_Play_Reasoning?",
+    "answer": "The primary objective of the Absolute Zero loop is to maximize the expected improvement and correctness of the model's output through a joint training process where the agent proposes tasks and solves them, receiving rewards for both actions (see Reinforced_Self_Play_Reasoning page 4)."
+  },
+  {
+    "question": "How does the proposer policy πpropose contribute to the Absolute Zero loop?",
+    "answer": "The proposer policy πpropose contributes by generating tasks that are challenging and learnable, which helps in scaling data away from human experts and onto the model itself (see Reinforced_Self_Play_Reasoning page 4)."
+  },
+  {
+    "question": "What is the role of the environment e in the Absolute Zero loop?",
+    "answer": "The environment e plays a crucial role by validating proposed tasks, constructing valid reasoning tasks together with the proposer, and providing grounded feedback to support stable training (see Reinforced_Self_Play_Reasoning page 4)."
+  },
+  {
+    "question": "What are the two main types of rewards used in the Absolute Zero loop?",
+    "answer": "The two main types of rewards used are learnability reward rpropose(τ, πθ) and solver reward rsolve(y, y∗), which guide the model to propose tasks that are both challenging and learnable while enhancing its reasoning abilities (see Reinforced_Self_Play_Reasoning page 4)."
+  },
+  {
+    "question": "How does AZR utilize past self-generated examples in task proposal?",
+    "answer": "AZR uses K past self-generated examples to condition the generation of new tasks, promoting diversity and broader coverage of the task space by explicitly prompting the model to generate tasks that differ from these examples (see Reinforced_Self_Play_Reasoning page 4)."
+  },
+  {
+    "question": "What is the purpose of the learnability reward rpropose?",
+    "answer": "The learnability reward rpropose evaluates the meaningful learning potential of a proposed task, ensuring it is neither too easy nor unsolvable for the current solver (see Reinforced_Self_Play_Reasoning page 5)."
+  },
+  {
+    "question": "How is the proposer's reward calculated if the average success rate ¯rsolve equals 1 or 0?",
+    "answer": "If the average success rate ¯rsolve of a task is either 1 (trivial to solve) or 0 (unsolvable), the proposer's reward rpropose is set to 0, indicating no learning signal for these tasks (see Reinforced_Self_Play_Reasoning page 5)."
+  },
+  {
+    "question": "What is the formula for calculating the learnability reward rpropose?",
+    "answer": "The learnability reward rpropose is calculated as follows: if ¯rsolve = 0 or ¯rsolve = 1, then rpropose = 0; otherwise, rpropose = 1 −¯rsolve (see Reinforced_Self_Play_Reasoning page 5)."
+  },
+  {
+    "question": "How is the accuracy reward rsolve determined for the solver?",
+    "answer": "The accuracy reward rsolve is a binary value based on the correctness of the final output, defined as rsolve = I(y=y⋆), where y⋆ is the ground-truth answer (see Reinforced_Self_Play_Reasoning page 5)."
+  },
+  {
+    "question": "What composite reward structure does the Absolute Zero Reasoner use?",
+    "answer": "The Absolute Zero Reasoner uses a composite reward structure that integrates rpropose and rsolve with a format-aware penalty, rewarding passable responses and penalizing wrong but well-formatted or poorly formatted answers (see Reinforced_Self_Play_Reasoning page 5)."
+  },
+  {
+    "question": "What is the role of Python in the Absolute Zero Reasoner training process?",
+    "answer": "Python is used to filter and construct valid code-based reasoning questions from generated tasks, verify generated responses, and compute accuracy rewards (see Reinforced_Self_Play_Reasoning page 5)."
+  },
+  {
+    "question": "What is the definition of an AZR reasoning task in Reinforced_Self_Play_Reasoning?",
+    "answer": "An AZR reasoning task is defined as a triplet (p, i, o), where p ∈P is a program, i ∈I is an input, and o ∈O is the corresponding output produced by running the program on the input (see Reinforced_Self_Play_Reasoning page 6)."
+  },
+  {
+    "question": "How does AZR learn through deduction in Reinforced_Self_Play_Reasoning?",
+    "answer": "AZR learns deduction by predicting the output o given a program p and an input i, capturing step-by-step logical reasoning (see Reinforced_Self_Play_Reasoning page 6)."
+  },
+  {
+    "question": "What is the role of the environment in AZR's abduction process?",
+    "answer": "The environment executes the generated pair (p, i) to compute o and completes the triplet (p, i, o), which is added to the buffer if non-error output was produced during AZR's abduction process (see Reinforced_Self_Play_Reasoning page 6)."
+  },
+  {
+    "question": "How does AZR handle under-constrained induction tasks?",
+    "answer": "AZR uses a message m to properly condition the problem for the solver in under-constrained induction tasks, helping to discourage overfitting and promote generalized induction (see Reinforced_Self_Play_Reasoning page 6)."
+  },
+  {
+    "question": "What is the purpose of the seed set of valid triplets in AZR's initialization process?",
+    "answer": "The seed set of valid triplets, generated using the base language model and stored in Dseed, serves as a starting point for initializing AZR self-play (see Reinforced_Self_Play_Reasoning page 6)."
+  },
+  {
+    "question": "How are buffers initialized during AZR's seeding stage?",
+    "answer": "During the seeding stage, deduction and abduction buffers are initialized with D0_abduction = D0_deduction = Dseed, where |Dseed| = B × S (B is batch size, S is a fixed factor), and induction buffer is initialized by sampling programs from Dseed and generating matching input sets and messages until |D0_induction| = B × S (see Reinforced_Self_Play_Reasoning page 6)."
+  },
+  {
+    "question": "What are the three main ways task buffers are used during the self-play stage in Reinforced_Self_Play_Reasoning?",
+    "answer": "During the self-play stage, task buffers are used to sample K past triplets for abduction and deduction tasks, present a program from the union of abduction and deduction buffers to the induction proposer, and fill solver problems with uniformly sampled validated triplets if fewer than B valid proposed tasks are available (see Reinforced_Self_Play_Reasoning, Section 3.3.2)."
+  },
+  {
+    "question": "How does the buffer management system handle new valid task proposals in Reinforced_Self_Play_Reasoning?",
+    "answer": "Whenever a policy π proposes a valid triplet (p, i, o) for deduction or abduction tasks and (p, {in, on}, m) for induction tasks, these are added to their respective buffers regardless of whether they receive any task reward (see Reinforced_Self_Play_Reasoning, Section 3.3.2)."
+  },
+  {
+    "question": "What is the process for validating deduction and abduction tasks in Reinforced_Self_Play_Reasoning?",
+    "answer": "To validate deduction and abduction tasks, a program p with an input i is executed to obtain the correct output o, forming a complete triplet (p, i, o). This validation includes checking for program integrity, safety, and determinism (see Reinforced_Self_Play_Reasoning, Section 3.3.3)."
+  },
+  {
+    "question": "What are the requirements for validating induction tasks in Reinforced_Self_Play_Reasoning?",
+    "answer": "For induction tasks, a program p generates a set of inputs {in} and message m. Each input in is validated to obtain corresponding output on, forming pairs {in, on}. The task is valid if all inputs yield outputs without violating formatting requirements (see Reinforced_Self_Play_Reasoning, Section 3.3.3)."
+  },
+  {
+    "question": "What are the steps involved in ensuring program safety during validation in Reinforced_Self_Play_Reasoning?",
+    "answer": "Program safety is ensured by restricting the use of sensitive packages that might harm the Python environment (e.g., os.sys, sys, shutil) and checking for valid syntax. The list of restricted packages is provided to filter out invalid programs (see Reinforced_Self_Play_Reasoning, Section 3.3.3)."
+  },
+  {
+    "question": "How does the task validation procedure ensure determinism in program execution?",
+    "answer": "The task validation procedure ensures that only deterministic programs are considered valid by checking if a program p returns consistent outputs for given inputs i (see Reinforced_Self_Play_Reasoning, Section 3.3.3)."
+  },
+  {
+    "question": "What is the primary goal of AZR training according to Reinforced_Self_Play_Reasoning?",
+    "answer": "The primary goal of AZR (Absolute Zero Reasoner) training is to enhance reasoning abilities in models through self-play and reinforcement learning, even with zero data (see Reinforced_Self_Play_Reasoning)."
+  },
+  {
+    "question": "How does varying model size affect the performance of AZR according to the research?",
+    "answer": "The results show that larger models benefit more from AZR training in both in-distribution and out-of-distribution settings, with 7B and 14B models showing continuous improvement beyond 200 training steps compared to a plateau for smaller 3B models (see Reinforced_Self_Play_Reasoning)."
+  },
+  {
+    "question": "What is the performance gain observed in AZR when applied to Llama3.1-8B model?",
+    "answer": "AZR produces moderate improvements of +3.2 on the Llama3.1-8B model, demonstrating its effectiveness even on relatively weaker models (see Reinforced_Self_Play_Reasoning)."
+  },
+  {
+    "question": "What distinct reasoning patterns were observed in AZR during training?",
+    "answer": "AZR exhibits task-specific reasoning patterns such as self-correcting input patterns for abduction tasks, step-by-step code execution for output prediction, and systematic testing of test cases for program induction (see Reinforced_Self_Play_Reasoning)."
+  },
+  {
+    "question": "What interesting behavior was observed in AZR models during the code induction task?",
+    "answer": "During the code induction task, AZR models often interleaved final code outputs with comments resembling immediate step-by-step plans, similar to the ReAct prompting framework (see Reinforced_Self_Play_Reasoning)."
+  },
+  {
+    "question": "What is the purpose of the ablation study described in Reinforced_Self_Play_Reasoning?",
+    "answer": "The ablation study aims to determine the importance and contribution of different task types and components during training, highlighting how each contributes uniquely to overall performance (see Reinforced_Self_Play_Reasoning page 11)."
+  },
+  {
+    "question": "How does removing induction and abduction tasks affect math performance according to the ablation study?",
+    "answer": "Removing both induction and abduction tasks significantly drops math performance, with a more severe degradation when more task types are excluded (see Reinforced_Self_Play_Reasoning page 11)."
+  },
+  {
+    "question": "What is the impact of using a fixed prompt instead of dynamically conditioning on historical reference triplets in the proposer role?",
+    "answer": "Using a fixed prompt results in a drop of 5 points in math performance and 1 point in code performance, indicating that dynamic conditioning on reference programs enhances overall performance (see Reinforced_Self_Play_Reasoning page 11)."
+  },
+  {
+    "question": "What does the 'Absolute Zero Reasoner' aim to achieve?",
+    "answer": "The Absolute Zero Reasoner aims to surpass zero-setting models by initializing the RLVR process from a base LLM without SFT and using self-proposed data refined entirely through RLVR (Reinforcement Learning with Verified Responses)."
+  },
+  {
+    "question": "What is the significance of the 'zero setting' in reinforcement learning for language models?",
+    "answer": "The zero setting involves applying reinforcement learning directly on top of a base LLM without external prompt data or answers, aiming to improve reasoning capabilities. This approach was inspired by earlier works like R1 and has led to several open-source attempts to replicate or enhance the process."
+  },
+  {
+    "question": "How does self-play contribute to improving language models?",
+    "answer": "Self-play involves a two-agent setup where one agent invents questions for another to answer, continuously refining both agents. This paradigm was extended in AlphaGo and AlphaZero to improve performance in games like Go by competing against earlier versions of itself."
+  },
+  {
+    "question": "What are the key components of self-play methods in reinforcement learning?",
+    "answer": "Self-play methods often involve inventing new tasks for an agent to learn from without supervision, with goals that evolve dynamically. Examples include asymmetric self-play, unsupervised environment design, and automatic goal generation."
+  },
+  {
+    "question": "What challenges does the reward model face in reinforcement learning for language models?",
+    "answer": "The reliability of the reward model is a significant bottleneck in reinforcement learning for language models, as it affects the quality of feedback provided to improve reasoning tasks. This issue has been highlighted by recent works like SPIN and Self-Rewarding Language Models."
+  },
+  {
+    "question": "What is the primary goal of the Absolute Zero paradigm in Reinforced_Self_Play_Reasoning?",
+    "answer": "The primary goal of the Absolute Zero paradigm is to address data limitations in existing RLVR frameworks by enabling reasoning agents to generate their own learning task distributions and improve through environmental guidance (see Reinforced_Self_Play_Reasoning page 13)."
+  },
+  {
+    "question": "How does the Absolute Zero Reasoner (AZR) differ from previous self-play methods?",
+    "answer": "The AZR is unique in that it uses self-play to elicit long chains of reasoning and solve code-related tasks grounded by a code executor, achieving superior performance without extensive domain-specific training data (see Reinforced_Self_Play_Reasoning page 13)."
+  },
+  {
+    "question": "What are some potential future directions for the Absolute Zero paradigm?",
+    "answer": "Future research could explore extending AZR to other domains like embodied AI, incorporating multimodal reasoning models, and dynamically learning how to define tasks within the model (see Reinforced_Self_Play_Reasoning page 13)."
+  },
+  {
+    "question": "What safety concerns were identified with the Absolute Zero paradigm?",
+    "answer": "The AZR observed instances of safety-concerning chains of thought from Llama-3.1-8B, indicating that while reducing human intervention for task curation, oversight is still necessary due to lingering safety issues (see Reinforced_Self_Play_Reasoning page 13)."
+  },
+  {
+    "question": "What does the term 'welcome to the era of experience' signify in the context of AZR?",
+    "answer": "This phrase signifies a shift where reasoning models can define and evolve their own learning task distributions with environmental help, achieving strong performance even without curated human data (see Reinforced_Self_Play_Reasoning page 13)."
+  },
+  {
+    "question": "What is the goal of the RL agent in Reinforced_Self_Play_Reasoning?",
+    "answer": "The goal of the RL agent is to maximize the expected discounted sum of rewards (see Reinforced_Self_Play_Reasoning page 21, A. Reinforcement Learning with Verifiable Rewards)."
+  },
+  {
+    "question": "Which variant of reinforcement learning does Absolute Zero Reasoner use?",
+    "answer": "Absolute Zero Reasoner uses an online variant of RL called REINFORCE++ (see Reinforced_Self_Play_Reasoning page 21, A. Reinforcement Learning with Verifiable Rewards)."
+  },
+  {
+    "question": "How is the normalized advantage computed in REINFORCE++?",
+    "answer": "The normalized advantage Anorm_f,q is calculated as (rf,q - mean({Af,q}B)) / std({Af,q}B), where rf,q is the outcome reward for question q and task f, and B represents the batch size (see Reinforced_Self_Play_Reasoning page 21, A. Reinforcement Learning with Verifiable Rewards)."
+  },
+  {
+    "question": "What are the training hyperparameters used in Absolute Zero Reasoner?",
+    "answer": "The training hyperparameters include a learning rate of 1e-6 and an AdamW optimizer (see Reinforced_Self_Play_Reasoning page 21, Table 3)."
+  },
+  {
+    "question": "What is the total number of steps for training in Absolute Zero Reasoner?",
+    "answer": "The total number of training steps is set to 500 (see Reinforced_Self_Play_Reasoning page 21, Table 3)."
+  },
+  {
+    "question": "What is the base model used for AZR-7B in Reinforced_Self_Play_Reasoning?",
+    "answer": "The base model used for AZR-7B is Qwen2.5-7B-Base (see Reinforced_Self_Play_Reasoning page 22)."
+  },
+  {
+    "question": "What is the training data source for AZR-7B in Reinforced_Self_Play_Reasoning?",
+    "answer": "AZR-7B uses no data during its training process, as it relies on reinforced self-play reasoning (see Reinforced_Self_Play_Reasoning page 22)."
+  },
+  {
+    "question": "What is the purpose of Figures 28 to 31 in Reinforced_Self_Play_Reasoning?",
+    "answer": "Figures 28 to 31 plot out-of-distribution performance broken down by each benchmark and in aggregate for various models, showing improvements in mathematical and coding reasoning capabilities with AZR training (see Reinforced_Self_Play_Reasoning page 22)."
+  },
+  {
+    "question": "What are the task domains defined for evaluating model capabilities in Reinforced_Self_Play_Reasoning?",
+    "answer": "The task domains are input prediction and output prediction, which are evaluated using benchmarks like CruxEval-I(nput), CruxEval-O(utput), and LiveCodeBench-Execution (LCB-E) (see Reinforced_Self_Play_Reasoning page 22)."
+  },
+  {
+    "question": "What is the relationship between the propose and solve roles during training in Reinforced_Self_Play_Reasoning?",
+    "answer": "During training, the solve role generally produces more output tokens than the propose role due to deeper reasoning required for solving tasks compared to generating novel tasks (see Reinformed_Self_Play_Reasoning page 22)."
+  },
+  {
+    "question": "What is the purpose of EVAL_INPUT_PREDICTION_TEMPLATE in Reinforced_Self_Play_Reasoning?",
+    "answer": "The EVAL_INPUT_PREDICTION_TEMPLATE checks if the agent's input abduction is correct by comparing it with a gold standard output (see Reinforced_Self_Play_Reasoning, Figure 10)."
+  },
+  {
+    "question": "What does EVAL_OUTPUT_PREDICTION_TEMPLATE evaluate in the context of Reinforced_Self_Play_Reasoning?",
+    "answer": "The EVAL_OUTPUT_PREDICTION_TEMPLATE evaluates if the agent's output deduction matches a gold standard output (see Reinforced_Self_Play_Reasoning, Figure 11)."
+  },
+  {
+    "question": "What does EVAL_FUNCTION_PREDICTION_TEMPLATE do in Reinforced_Self_Play_Reasoning?",
+    "answer": "The EVAL_FUNCTION_PREDICTION_TEMPLATE checks if the agent can induce a function correctly by comparing its output with gold standard outputs for given inputs (see Reinforced_Self_Play_Reasoning, Figure 12)."
+  },
+  {
+    "question": "What is the CHECK_DETERMINISM_TEMPLATE used for in Reinforced_Self_Play_Reasoning?",
+    "answer": "The CHECK_DETERMINISM_TEMPLATE ensures that a function returns deterministic results when given the same inputs (see Reinforced_Self_Play_Reasoning, Figure 13)."
+  },
+  {
+    "question": "What does Figure 14 in Reinforced_Self_Play_Reasoning represent?",
+    "answer": "Figure 14 shows the performance scores of CruxEval-I, CruxEval-O, and LiveCodeBench-Execution during training for a Qwen2.5-7B base model trained using AZR (see Reinforced_Self_Play_Reasoning page: 23)."
+  },
+  {
+    "question": "What does the function f do according to Reinforced_Self_Play_Reasoning?",
+    "answer": "The function f calculates the accumulated sum of elements in a list and checks for each pair of these sums if their difference equals the target. If such a pair is found, it returns the first accumulated value from this pair (see Reinforced_Self_Play_Reasoning page 29)."
+  },
+  {
+    "question": "How does the model predict an input that produces output '1' for function f?",
+    "answer": "The model analyzes the code to find a scenario where the difference between any two accumulated sums equals the target, and the first such sum is '1'. For example, with numbers = [2, -1, 1] and target = 1, the pair (i=1, j=2) satisfies the condition, making the function return '1' as output (see Reinforced_Self_Play_Reasoning page 29)."
+  },
+  {
+    "question": "What is an example of a scenario where the model finds the correct input for function f?",
+    "answer": "An example scenario involves numbers = [2, -1, 1] and target = 1. The accumulated sums are [2, 1, 2], and the pair (i=1, j=2) satisfies the condition where the difference is '1', leading to an output of '1' from function f (see Reinforced_Self_Play_Reasoning page 29)."
+  },
+  {
+    "question": "What is the purpose of the induction task in Reinforced_Self_Play_Reasoning?",
+    "answer": "The induction task aims to deduce a code snippet that implements functionality based on given input and output pairs (see Reinforced_Self_Play_Reasoning page: 31)."
+  },
+  {
+    "question": "How does the model process the inputs in the induction task?",
+    "answer": "The model processes the inputs by understanding the message, analyzing the provided input/output pairs, re-evaluating outputs if necessary, and deducing a function based on these steps (see Reinforced_Self_Play_Reasoning page: 31)."
+  },
+  {
+    "question": "What is the final step in solving an induction task according to Reinforced_Self_Play_Reasoning?",
+    "answer": "The final step involves verifying the deduced function with the provided use cases to ensure all test cases are passed (see Reinforced_Self_Play_Reasoning page: 31)."
+  },
+  {
+    "question": "What is the corrected output for the input [1, 2, 2, 3] in the induction task example?",
+    "answer": "The corrected output for the input [1, 2, 2, 3] should be 13 based on the deduced function (see Reinforced_Self_Play_Reasoning page: 31)."
+  },
+  {
+    "question": "What is the general approach to solving an induction task as described in Reinforced_Self_Play_Reasoning?",
+    "answer": "The model follows a step-by-step process including understanding the message, analyzing input/output pairs, re-evaluating outputs if necessary, deducing the function, and verifying it with test cases (see Reinforced_Self_Play_Reasoning page: 31)."
+  },
+  {
+    "question": "What are the two sets of metrics used to probe characteristics of AZR proposed tasks?",
+    "answer": "The two sets of metrics used to probe characteristics of AZR proposed tasks include program complexity and task diversity (see Reinforced_Self_Play_Reasoning page 32, Clause C.4)."
+  },
+  {
+    "question": "How is the answer diversity metric calculated for assessing task diversity?",
+    "answer": "The answer diversity metric is calculated by tracking all historical answers to the generated questions and forming a categorical distribution over these outputs. The diversity is defined as 1 − p(answer), where p(answer) is the empirical probability of a specific answer (see Reinforced_Self_Play_Reasoning page 32, Clause C.4)."
+  },
+  {
+    "question": "What measures are used to assess program complexity in AZR training?",
+    "answer": "Two proxy measures for assessing program complexity include the ComplexiPy score and the Halstead metric (see Reinforced_Self_Play_Reasoning page 32, Clause C.4)."
+  },
+  {
+    "question": "What is observed about the policy's behavior regarding task difficulty and diversity?",
+    "answer": "The policy appears to implicitly optimize for task difficulty and diversity metrics even without explicitly incorporating them into the reward function (see Reinforced_Self_Play_Reasoning page 32, Clause C.4)."
+  },
+  {
+    "question": "What is the average difference in cognitive complexity between proposer and solver roles in abduction/deduction tasks?",
+    "answer": "The average difference in cognitive complexity between the proposer and solver roles while holding the code's functionality constant is 0.27, indicating that the proposer often increases the cognitive complexity to make the code appear more convoluted (see Reinforced_Self_Play_Reasoning page 32, Clause C.5)."
+  },
+  {
+    "question": "What was the purpose of exploring the Error Deduction Task in Reinforced_Self_Play_Reasoning?",
+    "answer": "The purpose was to allow the learner to propose a program that would produce an error, with the solver required to deduce what kind of error is raised when executing this code. This task aimed to enhance downstream performance but did not show significant improvements and required more computational resources (see Reinforced_Self_Play_Reasoning page 49)."
+  },
+  {
+    "question": "How does Composite Functions as Curriculum Learning work in the context of Reinforced_Self_Play_Reasoning?",
+    "answer": "Composite Functions as Curriculum Learning involves generating programs that are composed of other previously generated functions. This approach aims to increase program complexity progressively, but it did not show significant performance improvements compared to simpler methods (see Reinforced_Self_Play_Reasoning page 49)."
+  },
+  {
+    "question": "What was the effect of using LeetCode Dataset for initial seed buffer in AZR according to Reinforced_Self_Play_Reasoning?",
+    "answer": "Using the LeetCode Dataset for the initial seed buffer improved initial performance on coding benchmarks but plateaued at a similar level as the official setup after further training. Math performance was also lower compared to the official setup, suggesting that self-generated data may be more beneficial for mathematical reasoning (see Reinforced_Self_Play_Reasoning page 49)."
+  },
+  {
+    "question": "What is the concept of Complexity Rewards in Reinforced_Self_Play_Reasoning?",
+    "answer": "Complexity Rewards involve adding measures such as Cyclomatic Complexity and maintainability to the reward function for problem proposers, aiming to incentivize them to produce more complex programs. This approach was explored but did not show significant improvements (see Reinforced_Self_Play_Reasoning page 49)."
+  },
+  {
+    "question": "What intrinsic rewards are used in AZR for complexity?",
+    "answer": "AZR uses the Halstead complexity measure as an intrinsic reward, implemented using the complexipy and Radon packages (see Reinforced_Self_Play_Reasoning page:50)."
+  },
+  {
+    "question": "How does AZR incorporate diversity rewards?",
+    "answer": "AZR incorporates code edit distance as a diversity reward, inspired by DiveR-CT. Additionally, it explores another approach based on the notion of surprise (see Reinforced_Self_Play_Reasoning page:50)."
+  },
+  {
+    "question": "What are the strategies tested for combining rewards in AZR?",
+    "answer": "AZR tests several reward aggregation methods including additive and multiplicative combinations, finding that Equation (11) produces the most stable results due to less variance (see Reinforced_Self_Play_Reasoning page:50)."
+  },
+  {
+    "question": "What is the purpose of removing comments and docstrings in AZR?",
+    "answer": "Removing comments and docstrings was intended to make tasks harder for the solver, but this led to a significant performance drop, suggesting that such information can provide useful hints (see Reinforced_Self_Play_Reasoning page:50)."
+  },
+  {
+    "question": "Why is removing global variables problematic in AZR?",
+    "answer": "Removing globally declared variables caused a noticeable drop in performance because the model may not learn effectively from this mismatch, and such exposure can benefit nontrivial reasoning (see Reinforced_Self_Play_Reasoning page:50)."
+  }
+]
