@@ -58,7 +58,7 @@ def main():
 
     training_args = SFTConfig(
         output_dir="./Qwen3-1.7B_FTT",
-        optim="paged_adamw_8bit",
+        optim="adamw_torch",
         do_eval=True,
         per_device_train_batch_size=2,
         gradient_accumulation_steps=16,
