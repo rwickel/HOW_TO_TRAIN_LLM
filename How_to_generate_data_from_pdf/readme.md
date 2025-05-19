@@ -157,42 +157,25 @@ response_schema: Dict[str, Any] = field(default_factory=lambda: {
         "required": ["question", "answer"]
     }
 })
-
-# You can add other global configurations here as needed.
-Key Configuration Options:
-
-pdf_folder: Path to the directory containing input PDF files.
-output_folder: Path to the directory where results will be saved.
-model: The identifier for the LLM to be used (e.g., "llama3.2:latest"). This must be compatible with your repl/llm.py setup.
-system_prompt: The instruction template given to the LLM. It supports placeholders:
-{filename}: The name of the PDF file being processed.
-{page}: The current page number.
-{text}: The extracted text content from the page.
-exclude_text: A list of strings. Any text matching these strings will be removed from the content extracted from each page before sending it to the LLM.
-response_schema: (Optional) A JSON schema to validate the LLM's output. If the output doesn't conform, the valid flag in the qa_response will be False.
-▶️ Usage
-Place PDF Files: Add the PDF files you want to process into the input_pdfs folder (or the folder specified in config.pdf_folder).
-
-Run the Extraction Script:
-Execute main.py from the command line. You can optionally specify the LLM model and output directory.
-
-Default execution (uses model and output directory from config.py):
+```
 
 Bash
-
+```
 python main.py
 Specify LLM model and output directory:
-
+```
 Bash
-
+```
 python main.py "<model_identifier>" "./custom_output_directory"
+```
+
 Examples:
 
 Bash
-
+```
 python main.py "llama3.2:latest" "./llama3_2_output"
 python main.py "qwen2.5:14b" "./qwen_outputs"
 python main.py "phi3:latest" "./phi3_results"
-
+```
 
 
