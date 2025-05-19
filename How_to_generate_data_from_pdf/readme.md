@@ -57,36 +57,6 @@ This project enables automatic extraction of Question-Answer pairs from PDF file
         * `filename_qa_results.json`: A structured list, where each item represents a page and includes its `doc_id`, `page_number`, `page_text`, extracted `qa_pairs` for that page, and the `raw_response` from the LLM.
 
 ---
-
-## Prerequisites
-
-* **Python 3.8+**
-* **An accessible LLM**:
-    * This project is designed to work with LLMs like LLaMA3, Qwen, or Phi. You'll need to have the chosen model running and accessible. For models like `llama3.2:latest`, this typically means having a local LLM serving tool like [Ollama](https://ollama.com/) installed and the model pulled (e.g., `ollama pull llama3.2`).
-    * Ensure the `repl/llm.py` is correctly configured to communicate with your LLM setup.
-* **Pandas** and **PyMuPDF**: These Python libraries are used for PDF processing and data handling.
-
----
-
-## Installation
-
-1.  **Clone the repository:**
-    ```bash
-    git clone <your-repository-url>
-    cd <your-repository-name>
-    ```
-
-2.  **Install dependencies:**
-    It's recommended to use a virtual environment.
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-    pip install pymupdf pandas # Add other dependencies if llm.py requires them (e.g., ollama, litellm)
-    ```
-    *Note: Depending on your `repl/llm.py` implementation, you might need to install additional libraries (e.g., `ollama`, `requests`, `litellm`). Please check `repl/llm.py` for specific LLM client library requirements.*
-
----
-
 ## Configuration
 
 All primary configurations are centralized in `reader/config.py`.
