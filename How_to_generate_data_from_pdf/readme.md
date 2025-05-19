@@ -131,21 +131,26 @@ response_schema: Dict[str, Any] = field(default_factory=lambda: {
 ## Output Example
 ```
   {
-    "question": "What is the main challenge faced by reinforcement learning with verifiable rewards (RLVR) when relying on human supervision?",
-    "answer": "The scarcity of high-quality, human-produced examples raises concerns about the long-term scalability of relying on human supervision, as seen in language model pretraining."
+    "question": "What is the purpose of the function `g_3()` in Reinforced_Self_Play_Reasoning?",
+    "answer": "The function `g_3()` generates all pairs of integers `(x, y)` such that `x + y <= 100` and returns them as a list (see Reinforced_Self_Play_Reasoning47, Clause 1)."
   },
   {
-    "question": "What is the proposed solution to address the challenges faced by RLVR when relying on human supervision?",
-    "answer": "We propose a new RLVR paradigm called Absolute Zero, which enables a single model to learn from outcome-based rewards without external data or human supervision."
+    "question": "How does the function `g_2(pairs)` group pairs by their sum in Reinforced_Self_Play_Reasoning?",
+    "answer": "The function `g_2(pairs)` groups pairs by their sum and returns a dictionary where each key is a unique sum and each value is a list of pairs that have that sum (see Reinforced_Self_Play_Reasoning47, Clause 2)."
   },
   {
-    "question": "What is the role of the Absolute Zero Reasoner (AZR) in the proposed Absolute Zero paradigm?",
-    "answer": "The AZR serves as an unified source of verifiable reward, guiding open-ended yet grounded learning by validating proposed code reasoning tasks and verifying answers through a code executor."
+    "question": "What does the function `g_1(pairs)` calculate in Reinforced_Self_Play_Reasoning?",
+    "answer": "The function `g_1(pairs)` calculates the product of each pair and returns a dictionary where each key is a unique product and each value is a list of pairs that have that product (see Reinforced_Self_Play_Reasoning47, Clause 3)."
   },
   {
-    "question": "What is the significance of the Absolute Zero Reasoner's ability to self-evolve its training curriculum and reasoning ability?",
-    "answer": "AZR achieves overall SOTA performance on coding and mathematical reasoning tasks, outperforming existing zero-setting models that rely on tens of thousands of in-domain human-curated examples."
+    "question": "What is the purpose of the `sum_dict` in Reinforced_Self_Play_Reasoning?",
+    "answer": "The `sum_dict` is a dictionary that groups pairs by their sum and contains information about the number of candidate pairs for each sum (see Reinforced_Self_Play_Reasoning47, Clause 4)."
   },
+  {
+    "question": "How does the `allowed_sums` list in Reinforced_Self_Play_Reasoning relate to the `sum_dict`?",
+    "answer": "The `allowed_sums` list contains sums that have more than one candidate pair and are therefore considered valid (see Reinforced_Self_Play_Reasoning47, Clause 5)."
+  },
+ 
 
 ```
 
