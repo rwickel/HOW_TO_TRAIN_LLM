@@ -131,25 +131,21 @@ response_schema: Dict[str, Any] = field(default_factory=lambda: {
 ## Output Example
 ```
   {
-    "question": "What is the purpose of the function `g_3()` in Reinforced_Self_Play_Reasoning?",
-    "answer": "The function `g_3()` generates all pairs of integers `(x, y)` such that `x + y <= 100` and returns them as a list (see Reinforced_Self_Play_Reasoning47, Clause 1)."
+    "question": "What is the purpose of the Error Deduction Task in Reinforced Self-play Reasoning?",
+    "answer": "The Error Deduction Task involves allowing the learner to propose a program that will produce an error, and requiring the solver to deduce what kind of error is raised when executing this code (see Reinforced_Self_Play_Reasoning49, Clause D.1)."
   },
   {
-    "question": "How does the function `g_2(pairs)` group pairs by their sum in Reinforced_Self_Play_Reasoning?",
-    "answer": "The function `g_2(pairs)` groups pairs by their sum and returns a dictionary where each key is a unique sum and each value is a list of pairs that have that sum (see Reinforced_Self_Play_Reasoning47, Clause 2)."
+    "question": "How does Composite Functions as Curriculum Learning work in Reinforced Self-play Reasoning?",
+    "answer": "Composite Functions as Curriculum Learning involves constraining the LLM to utilize a predefined set of programs within its main function, allowing it to bootstrap from earlier generations and increase program complexity (see Reinforced_Self_Play_Reasoning49, Clause D.2)."
   },
   {
-    "question": "What does the function `g_1(pairs)` calculate in Reinforced_Self_Play_Reasoning?",
-    "answer": "The function `g_1(pairs)` calculates the product of each pair and returns a dictionary where each key is a unique product and each value is a list of pairs that have that product (see Reinforced_Self_Play_Reasoning47, Clause 3)."
+    "question": "What is the effect of using Composite Functions as Curriculum Learning in Reinforced Self-play Reasoning?",
+    "answer": "Using Composite Functions as Curriculum Learning did not observe a significant difference in performance compared to the simpler approach, but it may be possible to design a stricter reward mechanism to enforce meaningful composition (see Reinforced_Self_Play_Reasoning49, Clause D.2)."
   },
   {
-    "question": "What is the purpose of the `sum_dict` in Reinforced_Self_Play_Reasoning?",
-    "answer": "The `sum_dict` is a dictionary that groups pairs by their sum and contains information about the number of candidate pairs for each sum (see Reinforced_Self_Play_Reasoning47, Clause 4)."
-  },
-  {
-    "question": "How does the `allowed_sums` list in Reinforced_Self_Play_Reasoning relate to the `sum_dict`?",
-    "answer": "The `allowed_sums` list contains sums that have more than one candidate pair and are therefore considered valid (see Reinforced_Self_Play_Reasoning47, Clause 5)."
-  },
+    "question": "What was found when using an initial seed buffer sourced from the LeetCode Dataset in Reinforced Self-play Reasoning?",
+    "answer": "Using an initial seed buffer sourced from the LeetCode Dataset resulted in an increase in initial performance on coding benchmarks, but the performance plateaued at roughly the same level after additional training steps (see Reinforced_Self_Play_Reasoning49, Clause D.3)."
+  }
  
 
 ```
