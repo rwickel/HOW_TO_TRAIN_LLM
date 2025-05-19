@@ -1,4 +1,4 @@
-# PDF Q&A Extraction Pipeline
+# PDF Q&A Extraction (Simple)
 
 This project enables automatic extraction of Question-Answer pairs from PDF files using large language models (LLMs) like **LLaMA3**, **Qwen**, or **Phi**. The pipeline leverages a structured approach with PDF text parsing, table inclusion (optional), prompt engineering, and configurable output.
 
