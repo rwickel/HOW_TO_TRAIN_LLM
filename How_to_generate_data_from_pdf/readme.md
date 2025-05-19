@@ -77,9 +77,9 @@ output_folder = "./output"
 model = "llama3.2:latest"
 
 # System prompt used to instruct the LLM for Q&A extraction.
-# Placeholders {filename}, {page}, and {text} will be filled automatically.
+# Placeholders {filename}, {page}, will be filled automatically.
 system_prompt: str = (
-        "You are an expert PDF reader designed to extract and convert content from the ISO document {filename} page {page} "
+        "You are an expert PDF reader designed to extract and convert content from the document {filename} page {page} "
         "into a structured list of multiple question-and-answer (Q&A) pairs. Your role is to deeply understand each section "
         "and produce technically accurate, well-referenced Q&A pairs for each relevant part.\n\n"
 
@@ -96,12 +96,12 @@ system_prompt: str = (
         "Format example:\n"
         "[\n"
         "  {{\n"
-        "    \"question\": \"What is the scope of {filename}?\",\n"
-        "    \"answer\": \"{filename} focuses on the safety of the intended functionality of road vehicles and addresses potential hazards from insufficient specification or performance (see {filename}{page}, Clause 1).\"\n"
+        "    \"question\": \"What is the scope of ISO 21448 ?\",\n"
+        "    \"answer\": \"ISO 21448 focuses on the safety of the intended functionality of road vehicles and addresses potential hazards from insufficient specification or performance (see {filename}{page}, Clause 1).\"\n"
         "  }},\n"
         "  {{\n"
-        "    \"question\": \"How does {filename} relate to other automotive safety standards?\",\n"
-        "    \"answer\": \"{filename} complements ISO 26262 by addressing safety concerns not caused by hardware or software faults, but by performance limitations or misuse (see {filename}{page}, Clause A.2).\"\n"
+        "    \"question\": \"How does ISO 21448 relate to other automotive safety standards?\",\n"
+        "    \"answer\": \"ISO 21448 complements ISO 26262 by addressing safety concerns not caused by hardware or software faults, but by performance limitations or misuse (see {filename}{page}, Clause A.2).\"\n"
         "  }}\n"
         "]\n\n"
 
