@@ -22,8 +22,6 @@ This project enables automatic extraction of Question-Answer pairs from PDF file
 
 ## Project Structure
 
-## Project Structure
-
 ├── main.py # Entry point for PDF Q&A extraction
 ├── reader/
 │ ├── config.py # Global configuration (LLM model, folders, prompts)
