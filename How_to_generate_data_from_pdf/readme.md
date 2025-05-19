@@ -159,6 +159,9 @@ response_schema: Dict[str, Any] = field(default_factory=lambda: {
 })
 ```
 
+## Run
+Place PDF Files: Add the PDF files you want to process into the input_pdfs folder (or the folder specified in config.pdf_folder).
+
 Bash
 ```
 python main.py
@@ -170,8 +173,6 @@ python main.py "<model_identifier>" "./custom_output_directory"
 ```
 
 Examples:
-
-Bash
 ```
 python main.py "llama3.2:latest" "./llama3_2_output"
 python main.py "qwen2.5:14b" "./qwen_outputs"
