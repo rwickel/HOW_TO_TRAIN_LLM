@@ -128,6 +128,27 @@ response_schema: Dict[str, Any] = field(default_factory=lambda: {
     }
 })
 ```
+## Output Example
+```
+  {
+    "question": "What is the main challenge faced by reinforcement learning with verifiable rewards (RLVR) when relying on human supervision?",
+    "answer": "The scarcity of high-quality, human-produced examples raises concerns about the long-term scalability of relying on human supervision, as seen in language model pretraining."
+  },
+  {
+    "question": "What is the proposed solution to address the challenges faced by RLVR when relying on human supervision?",
+    "answer": "We propose a new RLVR paradigm called Absolute Zero, which enables a single model to learn from outcome-based rewards without external data or human supervision."
+  },
+  {
+    "question": "What is the role of the Absolute Zero Reasoner (AZR) in the proposed Absolute Zero paradigm?",
+    "answer": "The AZR serves as an unified source of verifiable reward, guiding open-ended yet grounded learning by validating proposed code reasoning tasks and verifying answers through a code executor."
+  },
+  {
+    "question": "What is the significance of the Absolute Zero Reasoner's ability to self-evolve its training curriculum and reasoning ability?",
+    "answer": "AZR achieves overall SOTA performance on coding and mathematical reasoning tasks, outperforming existing zero-setting models that rely on tens of thousands of in-domain human-curated examples."
+  },
+
+```
+
 
 ## Run
 Place PDF Files: Add the PDF files you want to process into the input_pdfs folder (or the folder specified in config.pdf_folder).
