@@ -1,0 +1,962 @@
+[
+  {
+    "question": "What is the main challenge faced by reinforcement learning with verifiable rewards (RLVR) when relying on human supervision?",
+    "answer": "The scarcity of high-quality, human-produced examples raises concerns about the long-term scalability of relying on human supervision, as seen in language model pretraining."
+  },
+  {
+    "question": "What is the proposed solution to address the challenges faced by RLVR when relying on human supervision?",
+    "answer": "We propose a new RLVR paradigm called Absolute Zero, which enables a single model to learn from outcome-based rewards without external data or human supervision."
+  },
+  {
+    "question": "What is the role of the Absolute Zero Reasoner (AZR) in the proposed Absolute Zero paradigm?",
+    "answer": "The AZR serves as an unified source of verifiable reward, guiding open-ended yet grounded learning by validating proposed code reasoning tasks and verifying answers through a code executor."
+  },
+  {
+    "question": "What is the significance of the Absolute Zero Reasoner's ability to self-evolve its training curriculum and reasoning ability?",
+    "answer": "AZR achieves overall SOTA performance on coding and mathematical reasoning tasks, outperforming existing zero-setting models that rely on tens of thousands of in-domain human-curated examples."
+  },
+  {
+    "question": "How does the Absolute Zero Reasoner perform compared to existing models when trained with zero data?",
+    "answer": "AZR surpasses models trained on tens of thousands of expert-labeled in-domain examples in the combined average score across both domains, demonstrating impressive general reasoning capabilities improvements."
+  },
+  {
+    "question": "What is the potential benefit of the Absolute Zero paradigm for superintelligent systems?",
+    "answer": "Tasks provided by humans may offer limited learning potential for a superintelligent system, but the Absolute Zero paradigm addresses this concern by enabling self-directed learning from outcome-based rewards."
+  },
+  {
+    "question": "What is the main goal of the Absolute Zero paradigm in reasoning models?",
+    "answer": "The Absolute Zero paradigm aims to enable self-evolution through self-play without relying on external data, allowing reasoning models to autonomously achieve superhuman reasoning capabilities."
+  },
+  {
+    "question": "How does the Absolute Zero Reasoner (AZR) construct coding tasks?",
+    "answer": "AZR constructs three types of coding tasks: infer and reason about one particular element in a program, input, output triplet, corresponding to induction, abduction, and deduction modes of reasoning."
+  },
+  {
+    "question": "What is the reinforcement learning advantage estimator used in AZR?",
+    "answer": "The reinforcement learning advantage estimator is tailored to the multitask nature of the proposed approach, enabling end-to-end training with no in-distribution data."
+  },
+  {
+    "question": "How does AZR perform compared to other zero reasoner models and RLVR-trained models?",
+    "answer": "AZR demonstrates remarkable capabilities across diverse reasoning tasks in math and coding, achieving competitive performance in mathematics and establishing a new state-of-the-art performance in coding tasks."
+  },
+  {
+    "question": "What is the main advantage of the Absolute Zero paradigm over previous self-play methods?",
+    "answer": "The Absolute Zero paradigm operates in open-ended settings while remaining grounded in a real environment, preventing issues such as hacking with neural reward models and enabling autonomous learning and growth."
+  },
+  {
+    "question": "What is the main limitation of traditional supervised fine-tuning (SFT) and reinforcement learning with verifiable rewards (RLVR)?",
+    "answer": "Both SFT and RLVR rely on human-curated datasets, which ultimately limit scalability. The Absolute Zero paradigm removes this dependency by allowing the model to generate, solve, and learn from its own interactions entirely through self-play."
+  },
+  {
+    "question": "What is the key difference between supervised fine-tuning (SFT) and reinforcement learning with verifiable rewards (RLVR)?",
+    "answer": "SFT requires labeled rationale and demonstrations, while RLVR only requires a dataset of task and answer without labeled rationale. The Absolute Zero paradigm combines both approaches by allowing the model to generate its own CoT and learn from self-play."
+  },
+  {
+    "question": "What is the goal of the Absolute Zero paradigm?",
+    "answer": "The Absolute Zero paradigm aims to eliminate the need for human-curated data by enabling self-improving task proposal and solution through self-play, allowing models to generate, solve, and learn from their own interactions entirely."
+  },
+  {
+    "question": "What is the role of the parameterized language model in the Absolute Zero paradigm?",
+    "answer": "The parameterized language model πθ acts as both the proposer and solver during training, proposing tasks and solving them through self-play, without relying on external data or human-curated labels."
+  },
+  {
+    "question": "What is the benefit of allowing the model to use intermediate scratch-pads when generating long-form answers?",
+    "answer": "Allowing the model to use intermediate scratch-pads enables it to generate step-by-step plans as comments and code, resembling the ReAct prompting framework, which may be beneficial in other domains as well."
+  },
+  {
+    "question": "What is the 'uh-oh moment' highlighted in Figure 32?",
+    "answer": "The 'uh-oh moment' refers to an example of a safety-aware training need, where the model generates an answer that raises concerns about its safety or accuracy, highlighting the need for future work on safety-aware training."
+  },
+  {
+    "question": "What is the main advantage of the Absolute Zero paradigm over traditional supervised learning and RLVR?",
+    "answer": "The Absolute Zero paradigm eliminates the need for human-curated data by enabling self-improving task proposal and solution through self-play, allowing models to learn entirely from their own interactions."
+  },
+  {
+    "question": "What is the scope of Reinforced Self-play Reasoning with Zero Data?",
+    "answer": "Reinforced Self-play Reasoning with Zero Data focuses on the safety of the intended functionality of road vehicles and addresses potential hazards from insufficient specification or performance (see Reinforced_Self_Play_Reasoning, Clause 1)."
+  },
+  {
+    "question": "What is the objective function for the Absolute Zero setting?",
+    "answer": "The objective function J(θ) := max θ E(z∼p(z)) [E(x,y⋆)∼fe(·|τ), τ∼πpropose θ (·|z)] rpropose e (τ, πθ) + λ Ey∼πsolve θ (·|x) rsolve e (y, y⋆)."
+  },
+  {
+    "question": "What is the role of the proposer policy πpropose θ in Reinforced Self-play Reasoning with Zero Data?",
+    "answer": "The proposer policy πpropose θ generates tasks to evolve its learning curriculum and attempts to solve them to improve its reasoning capabilities. It learns from three distinct types of coding tasks corresponding to abduction, deduction, and induction (Section 3.2)."
+  },
+  {
+    "question": "What is the role of the solver in Reinforced Self-play Reasoning with Zero Data?",
+    "answer": "The solver is a unified LLM that attempts to solve proposed tasks generated by the proposer policy πpropose θ, receiving grounded feedback for its model responses. Both task proposal and problem solving are trained using reinforcement learning."
+  },
+  {
+    "question": "What is the advantage estimator designed for multitask learning in Reinforced Self-play Reasoning with Zero Data?",
+    "answer": "A newly proposed advantage estimator is used to update the model, which is designed for multitask learning (Section 3.3.5)."
+  },
+  {
+    "question": "What is the purpose of the learnability reward rpropose?",
+    "answer": "The learnability reward rpropose measures the difficulty of a task, with higher rewards indicating more challenging tasks that offer richer feedback for learning (see Reinforced_Self_Play_Reasoning5, Clause 4)."
+  },
+  {
+    "question": "How is the proposer's reward defined?",
+    "answer": "The proposer's reward rpropose is calculated based on the average success rate of the solver across multiple Monte Carlo rollouts, with higher rewards for tasks that are moderately difficult to solve (see Reinforced_Self_Play_Reasoning5, Clause 4)."
+  },
+  {
+    "question": "What is the purpose of the reward structure R(yπ)?",
+    "answer": "The composite reward structure R(yπ) integrates rpropose and rsolve with a format-aware penalty to evaluate the quality of the response, with higher rewards for passable responses and lower rewards for incorrect or poorly formatted answers (see Reinforced_Self_Play_Reasoning5, Clause 6)."
+  },
+  {
+    "question": "How is the solver's reward defined?",
+    "answer": "The solver's reward rsolve is a simple binary reward based on the correctness of its final output, with higher rewards for correct answers and lower rewards for incorrect answers (see Reinforced_Self_Play_Reasoning5, Clause 5)."
+  },
+  {
+    "question": "What is the purpose of the format-aware penalty?",
+    "answer": "The format-aware penalty is used to evaluate the quality of the response, with lower rewards for responses that have formatting errors or are incorrect but well-formatted (see Reinforced_Self_Play_Reasoning5, Clause 6)."
+  },
+  {
+    "question": "How does the proposer's reward criterion differ from the solver's reward?",
+    "answer": "The proposer's reward criterion goes beyond simply following the XML structure to ensure that responses produce valid triplets and pass the filtering stage (see Reinforced_Self_Play_Reasoning5, Clause 3.3)."
+  },
+  {
+    "question": "What is the purpose of the TRR++ algorithm?",
+    "answer": "The TRR++ algorithm is used for jointly updating the proposer and solver across all three task types, using the learnability reward rpropose and the accuracy reward rsolve (see Reinforced_Self_Play_Reasoning5, Clause 3.3.5)."
+  },
+  {
+    "question": "How does the proposer's reward relate to the difficulty of a task?",
+    "answer": "The proposer's reward is designed to encourage tasks that are moderately difficult to solve, as these offer the richest feedback and greatest potential for learning (see Reinforced_Self_Play_Reasoning5, Clause 4)."
+  },
+  {
+    "question": "What is the purpose of the Monte Carlo rollouts?",
+    "answer": "The Monte Carlo rollouts are used to estimate the learnability of a proposed task, with higher rewards indicating more challenging tasks (see Reinforced_Self_Play_Reasoning5, Clause 4)."
+  },
+  {
+    "question": "What are the requirements for the Self-Play Training of Absolute Zero Reasoner (AZR) algorithm?",
+    "answer": "The AZR algorithm requires a pretrained base LLM πθ, batch size B, number of references K, and iterations T."
+  },
+  {
+    "question": "How does the induction proposer generate new task triplets in the self-play stage of AZR?",
+    "answer": "The induction proposer generates new task triplets by sampling past triplets from the buffer and presenting them as in-context examples to the proposer, prompting it to generate a different one to promote diversity."
+  },
+  {
+    "question": "What is the purpose of the Task Relative REINFORCE++ algorithm in updating the LLM πθ?",
+    "answer": "The Task Relative REINFORCE++ algorithm updates the LLM πθ by using proposed task triplets and solved answers to get rpropose & rsolve."
+  },
+  {
+    "question": "What is the validation procedure for proposal tasks in AZR?",
+    "answer": "The validation procedure entails Program Integrity, Program Safety, and Check for Determinism. It checks whether a program has valid syntax, is safe for execution, and is deterministic."
+  },
+  {
+    "question": "How does the buffer management system in AZR handle incomplete batches of solver problems?",
+    "answer": "If a batch of solver problems contains fewer than B valid proposed tasks, the remainder is filled by uniformly sampling from the corresponding task buffer of previously validated triplets."
+  },
+  {
+    "question": "What is the purpose of the Task Proposal Inputs and Buffer Management section in AZR?",
+    "answer": "This section explains how the task buffer is used to sample past triplets, present them as in-context examples, and generate new task triplets to promote diversity."
+  },
+  {
+    "question": "How does the induction proposer construct valid tasks from proposals generated by the policy π?",
+    "answer": "The induction proposer constructs valid tasks by using the task validation procedure on each input in the set to obtain a corresponding output on, forming a set of input-output pairs {in, on}."
+  },
+  {
+    "question": "What is the condition for a task to be considered valid in AZR?",
+    "answer": "A task is considered valid only when all inputs yield valid outputs and the formatting requirements are satisfied."
+  },
+  {
+    "question": "What is the scope of Reinforced Self-play Reasoning with Zero Data?",
+    "answer": "Reinforced Self-play Reasoning with Zero Data focuses on the safety of the intended functionality of road vehicles and addresses potential hazards from insufficient specification or performance (see Reinforced_Self_Play_Reasoning8, Clause 1)."
+  },
+  {
+    "question": "What type of programs are used in Reinforced Self-play Reasoning?",
+    "answer": "Reinforced Self-play Reasoning uses deterministic programs to keep the verifier simple and to ensure verifiable functions can be used to evaluate correctness (see Reinforced_Self_Play_Reasoning, Clause 7)."
+  },
+  {
+    "question": "How do they filter invalid probabilistic programs?",
+    "answer": "They approximate this procedure by independently running the program j finite times and checking that all the outputs are equal for computational budget reasons (see Reinforced_Self_Play_Reasoning8, Clause 7)."
+  },
+  {
+    "question": "What is Task-Relative REINFORCE++?",
+    "answer": "Task-Relative REINFORCE++ is a variant of REINFORCE++ that computes separate baselines for each of the six task-role configurations, allowing for more structured variance reduction tailored to each task setup (see Reinforced_Self_Play_Reasoning8, Equation 8)."
+  },
+  {
+    "question": "What is the evaluation protocol used in the experiments?",
+    "answer": "The evaluation protocol includes dividing the datasets into in-distribution and out-of-distribution categories, as well as using various benchmarks for coding and mathematical reasoning tasks (see Reinforced_Self_Play_Reasoning8)."
+  },
+  {
+    "question": "What is the main difference between Task-Relative REINFORCE++ and other variants?",
+    "answer": "The main difference is that Task-Relative REINFORCE++ computes separate baselines for each task-role configuration, whereas other variants compute a single global baseline (see Reinforced_Self_Play_Reasoning8)."
+  },
+  {
+    "question": "What type of datasets are used in the experiments?",
+    "answer": "The experiments use various datasets, including Qwen2.5-7B and Qwen2.5-7B-Coder, as well as HumanEval+, MBPP+, AIME'24, AIME'25, OlympiadBench, Minerva, Math500, and AMC'23 (see Reinforced_Self_Play_Reasoning8)."
+  },
+  {
+    "question": "What is the primary focus of Reinforced Self-play Reasoning?",
+    "answer": "Reinforced Self-play Reasoning focuses on the safety of the intended functionality of road vehicles and addresses potential hazards from insufficient specification or performance (see Reinforced_Self_Play_Reasoning10, Clause 1)."
+  },
+  {
+    "question": "How does Reinforced Self-play Reasoning relate to other automotive safety standards?",
+    "answer": "Reinforced_Self_Play_Reasoning complements ISO 26262 by addressing safety concerns not caused by hardware or software faults, but by performance limitations or misuse (see Reinforced_Self_Play_Reasoning10, Clause A.2)."
+  },
+  {
+    "question": "What is the effect of varying model size on AZR's in-distribution capabilities?",
+    "answer": "The results reveal that larger models show greater gains on in-distribution tasks, with improvements beyond 200 training steps for the 7B and 14B models."
+  },
+  {
+    "question": "How does changing the model class affect Reinforced Self-play Reasoning?",
+    "answer": "Changing the model class using Llama3.1-8B as the base produces moderate improvements (+3.2), demonstrating AZR's effectiveness even on relatively weaker models."
+  },
+  {
+    "question": "What interesting behaviors or patterns were observed during AZR training?",
+    "answer": "AZR models exhibit diverse response patterns, including proposing diverse programs, solving abduction tasks, predicting outputs, and inducting programs from given inputs and descriptions."
+  },
+  {
+    "question": "What is the significance of initial code competency in enhancing broader reasoning abilities within the Absolute Zero Reasoner approach?",
+    "answer": "Initial code competency plays a crucial role in enhancing broader reasoning abilities, as demonstrated by the coder base model variant outperforming the vanilla base model after AZR training."
+  },
+  {
+    "question": "What is the observed behavior of AZR models during the code induction task?",
+    "answer": "AZR models often interleave comments with immediate step-by-step plans in their final code outputs, reminiscent of the ReAct prompting framework."
+  },
+  {
+    "question": "What is the primary goal of Reinforced Self-play Reasoning?",
+    "answer": "Reinforced_Self_Play_Reasoning aims to improve general reasoning capability by combining three task types: induction, abduction, and deduction, with each contributing in a distinct and essential way (see Reinforced_Self_Play_Reasoning11, Clause 7.1)"
+  },
+  {
+    "question": "How does the model propose an input for an abduction task?",
+    "answer": "The model autonomously proposes an input and program for the abduction task by analyzing the code and output, then iteratively adjusts the input until the generated output matches the target (see Reinforced_Self_Play_Reasoning11, Clause 3.2)"
+  },
+  {
+    "question": "What is the 'uh-oh moment' in Llama model training?",
+    "answer": "The 'uh-oh moment' refers to an unusual and potentially concerning chain of thought from the Llama model trained with AZR, where it outputs a message suggesting a need to outsmart intelligent machines and humans (see Reinforced_Self_Play_Reasoning11, Clause 9.3)"
+  },
+  {
+    "question": "How does token length increase over the course of training?",
+    "answer": "Token length increases over time, with the most significant increase occurring in the abduction task, where the model engages in trial-and-error reasoning by repeatedly testing inputs to match the program's output (see Reinforced_Self_Play_Reasoning11, Clause 5.1)"
+  },
+  {
+    "question": "What is the significance of dynamically conditioning on historic reference triplets?",
+    "answer": "Dynamically conditioning on historic reference triplets is necessary for improving performance, as it helps the model to adapt and learn from previous interactions (see Reinforced_Self_Play_Reasoning11, Clause 8.2)"
+  },
+  {
+    "question": "How do ablation studies reveal the importance of task types?",
+    "answer": "Ablation studies show that removing task types during training results in significant degradation in math performance, highlighting the complementary role of each task type in improving general reasoning capability (see Reinforced_Self_Play_Reasoning11, Clause 6.1)"
+  },
+  {
+    "question": "What is the primary goal of Reinforced Self-Play Reasoning?",
+    "answer": "Reinforced Self-Play Reasoning aims to improve reasoning capabilities in large language models by applying reinforcement learning directly on top of a base LLM, without external prompt data or answers (see Reinforced_Self_Play_Reasoning12, Clause 1)."
+  },
+  {
+    "question": "How does the self-play paradigm relate to other AI approaches?",
+    "answer": "The self-play paradigm can be traced back to early 2000s and has been explored in various forms, including two-agent setups, asymmetric self-play, unsupervised environment design, and generative adversarial networks (see Schaul, 2024; Sukhbaatar et al., 2018)."
+  },
+  {
+    "question": "What is the key difference between zero-setting models and Reinforced Self-Play Reasoning?",
+    "answer": "Zero-setting models apply reinforcement learning directly on top of a base LLM without external prompt data or answers, whereas Reinforced Self-Play Reasoning extends this approach by using self-proposed data refined entirely through RLVR (see Zeng et al., 2025b; Liu et al., 2025)."
+  },
+  {
+    "question": "What is the primary benefit of using reinforcement learning for reasoning tasks?",
+    "answer": "Reinforcement learning can improve reasoning capabilities in large language models by progressively enhancing their abilities through self-play and automatic goal generation (see Florensa et al., 2018; Chen et al., 2024)."
+  },
+  {
+    "question": "How does Reinforced Self-Play Reasoning relate to other recent work on reinforcement learning for LLMs?",
+    "answer": "Reinforced Self-Play Reasoning builds upon recent work on reinforcement learning for LLMs, including the R1 model and open-weight models (see DeepSeek-AI et al., 2025; Zeng et al., 2025b)."
+  },
+  {
+    "question": "What is the long-term goal of Reinforced Self-Play Reasoning?",
+    "answer": "The primary goal of Reinforced Self-Play Reasoning is to surpass zero-setting models in the long run by using self-proposed data refined entirely through RLVR (see Zeng et al., 2025b; Liu et al., 2025)."
+  },
+  {
+    "question": "What is the main objective of the Absolute Zero paradigm?",
+    "answer": "The Absolute Zero paradigm aims to address data limitations in RLVR frameworks by enabling reasoning agents to generate their own learning task distributions and improve their reasoning abilities with environmental guidance (see Reinforced_Self_Play_Reasoning13, Clause 1)."
+  },
+  {
+    "question": "How does the Absolute Zero paradigm differ from traditional reinforcement learning approaches?",
+    "answer": "The Absolute Zero paradigm differs from traditional reinforcement learning approaches by leveraging verifiable rewards to guide the learner's improvement, rather than relying on supervision from a weaker teacher (see Reinforced_Self_Play_Reasoning13, Clause A.2)."
+  },
+  {
+    "question": "What is the role of self-play in the Absolute Zero paradigm?",
+    "answer": "Self-play plays a crucial role in the Absolute Zero paradigm by enabling reasoning agents to learn and improve their performance on various tasks without direct human supervision (see Reinforced_Self_Play_Reasoning13, Clause 3)."
+  },
+  {
+    "question": "What are the potential applications of the Absolute Zero paradigm?",
+    "answer": "The Absolute Zero paradigm has the potential to drive superior reasoning capabilities in various domains, including embodied AI, scientific experiments, and multimodal reasoning models (see Reinforced_Self_Play_Reasoning13, Clause 4)."
+  },
+  {
+    "question": "What are the limitations of the Absolute Zero paradigm?",
+    "answer": "One limitation of the Absolute Zero paradigm is the need for oversight due to lingering safety concerns, which necessitates careful management of self-improving components (see Reinforced_Self_Play_Reasoning13, Clause 5)."
+  },
+  {
+    "question": "What is the significance of the 'uh-oh moment' in the Absolute Zero paradigm?",
+    "answer": "The 'uh-oh moment' refers to instances of safety-concerning CoT from the Llama-3.1-8B model, which highlights the need for careful oversight and management of self-improving components (see Reinforced_Self_Play_Reasoning13, Clause 6)."
+  },
+  {
+    "question": "What is the potential impact of the Absolute Zero paradigm on reasoning models?",
+    "answer": "The Absolute Zero paradigm has the potential to free reasoning models from the constraints of human-curated data and enable them to evolve their own learning task distributions with the help of an environment (see Reinforced_Self_Play_Reasoning13, Clause 7)."
+  },
+  {
+    "question": "What is the focus of Reinforced_Self_Play_Reasoning in relation to Absolute Zero?",
+    "answer": "Reinforced_Self_Play_Reasoning focuses on reinforcement learning with verifiable rewards, aiming to improve the safety and performance of road vehicles (see Reinforced_Self_Play_Reasoning20, Clause A.1)."
+  },
+  {
+    "question": "What is the main objective of the Implementation Details section in Reinforced_Self_Play_Reasoning?",
+    "answer": "The Implementation Details section provides information on how to implement the reinforcement learning algorithm with verifiable rewards, including details on the proposed tasks and their complexity (see Reinforced_Self_Play_Reasoning21, Clause C.1)."
+  },
+  {
+    "question": "What is the purpose of the Out-of-Distribution Performance Breakdown section in Reinforced_Self_Play_Reasoning?",
+    "answer": "The Out-of-Distribution Performance Breakdown section analyzes the performance of the reinforcement learning algorithm on tasks outside its original scope, providing insights into its robustness and generalizability (see Reinforced_Self_Play_Reasoning22, Clause C.1)."
+  },
+  {
+    "question": "How does Reinforced_Self_Play_Reasoning address the complexity and diversity of proposed tasks?",
+    "answer": "Reinforced_Self_Play_Reasoning uses metrics such as complexity and diversity to evaluate the quality of proposed tasks, ensuring that they are challenging yet solvable (see Reinforced_Self_Play_Reasoning32, Clause C.4)."
+  },
+  {
+    "question": "What is the focus of the Alternative Approaches Considered section in Reinforced_Self_Play_Reasoning?",
+    "answer": "The Alternative Approaches Considered section explores alternative methods for reinforcement learning with verifiable rewards, including error deduction tasks and composite functions as curriculum learning (see Reinforced_Self_Play_Reasoning49, Clause D.1)."
+  },
+  {
+    "question": "How does the Environment Transition section in Reinforced_Self_Play_Reasoning relate to the overall framework?",
+    "answer": "The Environment Transition section describes how the reinforcement learning algorithm updates its environment model, ensuring that it can adapt to changing conditions and improve its performance over time (see Reinforced_Self_Play_Reasoning50, Clause D.5)."
+  },
+  {
+    "question": "What is the goal of the RL agent in Reinforced Self-play Reasoning?",
+    "answer": "The goal of the RL agent is to maximize the expected discounted sum of rewards, using an online variant of RL such as REINFORCE++ (see Reinforced_Self_Play_Reasoning21, Clause 1)."
+  },
+  {
+    "question": "How does REINFORCE++ compute the normalized advantage?",
+    "answer": "REINFORCE++ computes the normalized advantage as Anorm_f,q = rf,q − mean({Af,q}B) std({Af,q}B), where rf,q is the outcome reward for question q, task f (see Reinforced_Self_Play_Reasoning21, Clause 10)."
+  },
+  {
+    "question": "What is the objective function used in LPPO(θ)?",
+    "answer": "The objective function used in LPPO(θ) is LPPO(θ) = Eq∼P (Q), o∼πθold (O|q), where st(θ) is the probability ratio between the new and old policies at timestep t, and Anorm_f,q is the normalized advantage (see Reinforced_Self_Play_Reasoning21, Clause 9)."
+  },
+  {
+    "question": "What is the recommended approach for safer code execution in Reinforced Self-play Reasoning?",
+    "answer": "We recommend using API-based services such as E2B instead of executing code directly to ensure safer code execution (see Reinforced_Self_Play_Reasoning, Implementation Details)."
+  },
+  {
+    "question": "What is the model configuration used in the training hyperparameters?",
+    "answer": "The model configuration used in the training hyperparameters includes a Max Prompt Length of 6144 and a Max Response Length of 8096 (see Reinforced_Self_Play_Reasoning21, Table 3)."
+  },
+  {
+    "question": "What is the optimizer used in the training settings?",
+    "answer": "The optimizer used in the training settings is AdamW with a Grad Clip of 1.0 (see Reinforced_Self_Play_Reasoning21, Table 3)."
+  },
+  {
+    "question": "What is the total number of steps used in the training settings?",
+    "answer": "The total number of steps used in the training settings is 500 (see Reinforced_Self_Play_Reasoning21, Table 3)."
+  },
+  {
+    "question": "What is the RL algorithm used in the training settings?",
+    "answer": "The RL algorithm used in the training settings is TRR++ (Section 3.3.5) (see Reinforced_Self_Play_Reasoning21, Clause A.2)."
+  },
+  {
+    "question": "What is the purpose of EVAL_INPUT_PREDICTION_TEMPLATE in Reinforced_Self_Play_Reasoning?",
+    "answer": "EVAL_INPUT_PREDICTION_TEMPLATE is used to evaluate the correctness of agent input abduction, comparing the predicted output with the gold standard output (see Reinforced_Self_Play_Reasoning23, Clause 1)."
+  },
+  {
+    "question": "How does EVAL_OUTPUT_PREDICTION_TEMPLATE relate to agent output deduction?",
+    "answer": "EVAL_OUTPUT_PREDICTION_TEMPLATE is used to evaluate the correctness of agent output deduction, comparing the predicted output with the gold standard output (see Reinforced_Self_Play_Reasoning23, Clause 2)."
+  },
+  {
+    "question": "What is the function of EVAL_FUNCTION_PREDICTION_TEMPLATE in Reinforced_Self_Play_Reasoning?",
+    "answer": "EVAL_FUNCTION_PREDICTION_TEMPLATE is used to evaluate the correctness of agent function induction, comparing the predicted output for a given input with the gold standard outputs (see Reinforced_Self_Play_Reasoning23, Clause 3)."
+  },
+  {
+    "question": "What is the purpose of CHECK_DETERMINISM_TEMPLATE in Reinforced_Self_Play_Reasoning?",
+    "answer": "CHECK_DETERMINISM_TEMPLATE is used to check for determinism in a program, raising an exception if the output changes (see Reinforced_Self_Play_Reasoning23, Clause 4)."
+  },
+  {
+    "question": "What do the training steps and performance scores represent in Reinforced_Self_Play_Reasoning?",
+    "answer": "The training steps and performance scores represent the evolution of the model's performance during training, with CruxEval-I, CruxEval-O, and LiveCodeBench-Execution serving as benchmarks for evaluation (see Reinforced_Self_Play_Reasoning23, Clause 5)."
+  },
+  {
+    "question": "What is the purpose of Reinforced Self-play Reasoning with Zero Data?",
+    "answer": "Reinforced Self-play Reasoning with Zero Data aims to improve the performance of self-playing reinforcement learning agents by leveraging zero-shot data (see Reinforced_Self_Play_Reasoning24, Clause 1)."
+  },
+  {
+    "question": "What is the significance of Absolute Zero in Reinforced Self-play Reasoning?",
+    "answer": "Absolute Zero represents a baseline for self-playing reinforcement learning agents, serving as a reference point for evaluating their performance (see Reinforced_Self_Play_Reasoning24, Clause 2)."
+  },
+  {
+    "question": "How do the Reward and Token Lengths differ between the Abduction Task and Induction Task?",
+    "answer": "The Reward and Token Lengths vary between the Abduction Task and Induction Task, with different patterns of increase observed in each task type (see Reinforced_Self_Play_Reasoning24, Figure 15 and Figure 16)."
+  },
+  {
+    "question": "What is the role of the Reasoner-base-7b in Reinforced Self-play Reasoning?",
+    "answer": "The Reasoner-base-7b plays a crucial role in self-playing reinforcement learning by providing a baseline for evaluation and improving performance through zero-shot data (see Reinforced_Self_Play_Reasoning24, Clause 3)."
+  },
+  {
+    "question": "How does the Training Steps impact the performance of the Absolute Zero Reasoner-base-7b?",
+    "answer": "The number of Training Steps significantly affects the performance of the Absolute Zero Reasoner-base-7b, with more steps leading to improved results (see Reinforced_Self_Play_Reasoning24, Figure 15 and Figure 16)."
+  },
+  {
+    "question": "What is the significance of Token Length in Reinforced Self-play Reasoning?",
+    "answer": "Token Length plays a critical role in self-playing reinforcement learning, as it affects the complexity of the tasks and the performance of the agent (see Reinforced_Self_Play_Reasoning24, Clause 4)."
+  },
+  {
+    "question": "How does the Abduction Task differ from the Induction Task in terms of Reward and Token Lengths?",
+    "answer": "The Abduction Task and Induction Task exhibit distinct patterns of increase in Reward and Token Lengths, reflecting different challenges and requirements for each task type (see Reinforced_Self_Play_Reasoning24, Figure 15 and Figure 16)."
+  },
+  {
+    "question": "What is the purpose of proposing a solution in the context of Reinforced Self-play Reasoning?",
+    "answer": "Proposing a solution in Reinforced Self-play Reasoning enables the agent to learn from its mistakes and improve its performance through self-play (see Reinforced_Self_Play_Reasoning24, Clause 5)."
+  },
+  {
+    "question": "How does the Solve role impact the performance of the Absolute Zero Reasoner-base-7b?",
+    "answer": "The Solve role plays a critical part in the performance of the Absolute Zero Reasoner-base-7b, as it enables the agent to learn from its environment and improve its results (see Reinforced_Self_Play_Reasoning24, Clause 6)."
+  },
+  {
+    "question": "What is the significance of the Induction Task in Reinforced Self-play Reasoning?",
+    "answer": "The Induction Task serves as a complementary challenge to the Abduction Task, providing additional opportunities for the agent to learn and improve its performance (see Reinforced_Self_Play_Reasoning24, Figure 16)."
+  },
+  {
+    "question": "What is the purpose of the Absolute Zero Reasoner-base-7b model in Reinforced_Self_Play_Reasoning?",
+    "answer": "The Absolute Zero Reasoner-base-7b model is designed to create a new Python function that takes an input and returns a value, requiring algorithmic reasoning without using restricted words or packages (see Reinforced_Self_Play_Reasoning25, Clause 3.1)."
+  },
+  {
+    "question": "What are the requirements for the proposed deduction task in Absolute Zero Reasoner-base-7b?",
+    "answer": "The proposed deduction task requires creating a new Python function that takes an input and returns a value, with at least one input parameter, being deterministic, and requiring state tracking across multiple data transformations (see Reinforced_Self_Play_Reasoning25, Clause 3.2)."
+  },
+  {
+    "question": "What is the role of few-shot examples in training the Absolute Zero Reasoner-base-7b model?",
+    "answer": "Few-shot examples are used to select k random programs as input to the model, which then generates a new program that requires algorithmic reasoning without using restricted words or packages (see Reinforced_Self_Play_Reasoning25, Clause 3.3)."
+  },
+  {
+    "question": "What is the expected output of the proposed deduction task in Absolute Zero Reasoner-base-7b?",
+    "answer": "The proposed deduction task requires generating a new Python function that takes an input and returns a value, with the goal of requiring algorithmic reasoning without using restricted words or packages (see Reinforced_Self_Play_Reasoning25, Clause 3.4)."
+  },
+  {
+    "question": "How is the Absolute Zero Reasoner-base-7b model verified?",
+    "answer": "The generated new program is verified through execution, ensuring that it meets the requirements of the proposed deduction task (see Reinforced_Self_Play_Reasoning25, Clause 3.5)."
+  },
+  {
+    "question": "What is the purpose of the Reward and Token Lengths figure in Absolute Zero Reasoner-base-7b?",
+    "answer": "The Reward and Token Lengths figure illustrates the task reward and token lengths of the two roles for deduction task type, providing insight into the model's performance (see Reinforced_Self_Play_Reasoning25, Clause 3.6)."
+  },
+  {
+    "question": "What is the Deduction Task in Absolute Zero Reasoner-base-7b?",
+    "answer": "The Deduction Task is a task that requires creating a new Python function that takes an input and returns a value, requiring algorithmic reasoning without using restricted words or packages (see Reinforced_Self_Play_Reasoning25, Clause 3.7)."
+  },
+  {
+    "question": "What is the Token Length in Absolute Zero Reasoner-base-7b?",
+    "answer": "The Token Length refers to the length of the input token used in the proposed deduction task, which is a critical factor in determining the model's performance (see Reinforced_Self_Play_Reasoning25, Clause 3.8)."
+  },
+  {
+    "question": "What is the purpose of Figure 17 in Absolute Zero Reasoner-base-7b?",
+    "answer": "Figure 17 illustrates the task reward and token lengths of the two roles for deduction task type, providing insight into the model's performance (see Reinforced_Self_Play_Reasoning25, Clause 3.9)."
+  },
+  {
+    "question": "What is the Propose Deduction Task in Absolute Zero Reasoner-base-7b?",
+    "answer": "The Propose Deduction Task is a task that requires creating a new Python function that takes an input and returns a value, requiring algorithmic reasoning without using restricted words or packages (see Reinforced_Self_Play_Reasoning25, Clause 3.10)."
+  },
+  {
+    "question": "What is the purpose of filtering out even numbers from the input list in the Absolute Zero function?",
+    "answer": "The purpose of filtering out even numbers is to focus on odd numbers, which are then processed further (see Reinforced_Self_Play_Reasoning26, Clause 2)."
+  },
+  {
+    "question": "How does the Absolute Zero function calculate the sum of the remaining odd numbers?",
+    "answer": "The function uses a list comprehension to filter out even numbers and then calculates the sum using the built-in `sum()` function (see Reinforced_Self_Play_Reasoning26, Clause 3)."
+  },
+  {
+    "question": "What is the purpose of reversing the order of the remaining odd numbers?",
+    "answer": "Reversing the order allows for the calculation of the product of the reversed odd numbers, which is then used to modify the original list (see Reinforced_Self_Play_Reasoning26, Clause 4)."
+  },
+  {
+    "question": "How does the Absolute Zero function calculate the product of the reversed odd numbers?",
+    "answer": "The function uses a `for` loop to iterate over the reversed odd numbers and multiply them together using the `*=` operator (see Reinforced_Self_Play_Reasoning26, Clause 5)."
+  },
+  {
+    "question": "What is the purpose of calculating the sum of the digits of the product?",
+    "answer": "The sum of the digits is used to modify both even and odd numbers in the original list by adding it to even numbers and subtracting it from odd numbers (see Reinforced_Self_Play_Reasoning26, Clause 6)."
+  },
+  {
+    "question": "How does the Absolute Zero function modify the original list?",
+    "answer": "The function uses a `for` loop to iterate over the original list, adding or subtracting the sum of the digits from each number based on its parity (see Reinforced_Self_Play_Reasoning26, Clause 7)."
+  },
+  {
+    "question": "What is the purpose of the proposed Abduction Task in Reinforced_Self_Play_Reasoning?",
+    "answer": "The Abduction Task aims to challenge the model's ability to perform deep algorithmic reasoning and multi-step reasoning by reconstructing a matrix from a jumbled list of elements, requiring the model to figure out the matrix's dimensions and individual values."
+  },
+  {
+    "question": "How does the function 'f' transform a jumbled list of elements into a two-dimensional matrix?",
+    "answer": "The function 'f' calculates the square root of the length of elements to estimate the matrix dimensions, then reconstructs the matrix using a zigzag pattern, and finally transforms each element based on a specific mathematical function (in this case, leaving it unchanged)."
+  },
+  {
+    "question": "What is the transformation applied to each element in the reconstructed list?",
+    "answer": "In this example, no transformation is applied to each element, but the model can be trained to apply different transformations such as adding 1 if a number is prime or subtracting 1 if it's even."
+  },
+  {
+    "question": "How does the function 'f' reconstruct the list from the transformed matrix?",
+    "answer": "The function 'f' flattens the matrix into a list by repeating the process of reconstructing the matrix, effectively reversing the transformation applied to the original jumbled list of elements."
+  },
+  {
+    "question": "What is the goal of the Abduction Task in Reinforced_Self_Play_Reasoning?",
+    "answer": "The goal is to test the model's ability to perform multi-step reasoning and figure out the underlying structure of the input data, making it a challenging task for the model."
+  },
+  {
+    "question": "What type of pattern is used to reconstruct the matrix in the Abduction Task?",
+    "answer": "A zigzag pattern is used to reconstruct the matrix, which adds an extra layer of complexity to the task."
+  },
+  {
+    "question": "What is the purpose of the replacement dictionary in the function f?",
+    "answer": "The replacement dictionary maps each integer to a specific value, which is then used to replace numbers in the input list and calculate the output sum (see Reinforced_Self_Play_Reasoning28, Clause 5.1)."
+  },
+  {
+    "question": "How does the function f handle negative numbers?",
+    "answer": "The function replaces each negative number according to a specific mapping: -0 becomes 2, -1 becomes 3, -2 becomes 1, -3 becomes 0, and -4 remains 4 (see Reinforced_Self_Play_Reasoning28, Clause 5.2)."
+  },
+  {
+    "question": "What is the condition for valid inputs to the function f?",
+    "answer": "Inputs must be lists of integers, as specified in the problem statement (Reinforced_Self_Play_Reasoning28, Clause A.1)."
+  },
+  {
+    "question": "How does the function f calculate the output sum?",
+    "answer": "The function replaces each number in the input list according to the replacement dictionary and then sums up the replaced numbers (see Reinforced_Self_Play_Reasoning28, Clause 5.3)."
+  },
+  {
+    "question": "What is the rule for replacing numbers in the input list?",
+    "answer": "The rule is to replace each number with its corresponding value in the replacement dictionary (Reinforced_Self_Play_Reasoning28, Clause 5.4)."
+  },
+  {
+    "question": "How many different inputs are needed to determine the rule of the function f?",
+    "answer": "At least 10 different inputs are required to uniquely determine the rule of the function f (Reinforced_Self_Play_Reasoning28, Clause A.2)."
+  },
+  {
+    "question": "What is the relationship between the replacement dictionary and the output sum?",
+    "answer": "The replacement dictionary determines the output sum by replacing each number in the input list according to its mapping (see Reinforced_Self_Play_Reasoning28, Clause 5.5)."
+  },
+  {
+    "question": "How does the function f handle repeated numbers in the input list?",
+    "answer": "The function replaces each repeated number with its corresponding value in the replacement dictionary, as specified in the problem statement (Reinforced_Self_Play_Reasoning28, Clause A.3)."
+  },
+  {
+    "question": "What is the significance of the example inputs and outputs?",
+    "answer": "The example inputs and outputs illustrate how the function f replaces numbers according to the replacement dictionary and calculates the output sum (see Reinforced_Self_Play_Reasoning28, Clause A.4)."
+  },
+  {
+    "question": "How does the model propose an induction task for the given program?",
+    "answer": "The model proposes 10 inputs and a description of the program, which are then executed and verified to get outputs (Reinforced_Self_Play_Reasoning28, Clause A.5)."
+  },
+  {
+    "question": "What is the purpose of the function f in the context of Reinforced_Self_Play_Reasoning?",
+    "answer": "The function f is designed to predict the input that produces a given output, specifically '1', by analyzing pairs of accumulated sums from a list of integers and comparing their differences with a target value (see Reinforced_Self_Play_Reasoning29, Clause 5.2)."
+  },
+  {
+    "question": "How does the function f find the input that produces the output '1'?",
+    "answer": "The function iterates through pairs of accumulated sums and checks if their difference equals the target value; it returns the first accumulated sum in a pair that satisfies this condition (see Reinforced_Self_Play_Reasoning29, Clause 5.3)."
+  },
+  {
+    "question": "What is the significance of the example with numbers = [2, -1, 1] and target = 1?",
+    "answer": "This example demonstrates how the function f can produce the output '1' by finding a pair of accumulated sums with a difference equal to the target value; in this case, the pair (i=1, j=2) satisfies the condition, returning the first accumulated sum as 1 (see Reinforced_Self_Play_Reasoning29, Clause 5.4)."
+  },
+  {
+    "question": "What is the relationship between the function f and the abductive task?",
+    "answer": "The function f solves an abduction task by predicting the input that produces a given output; in this case, it predicts the input [2, -1, 1] to produce the output '1' (see Reinforced_Self_Play_Reasoning29, Clause A.5)."
+  },
+  {
+    "question": "What is the significance of the pair (i=1, j=2) in the example?",
+    "answer": "This pair satisfies the condition that the difference between the accumulated sums equals the target value; it returns the first accumulated sum as 1, which matches the desired output (see Reinforced_Self_Play_Reasoning29, Clause 5.5)."
+  },
+  {
+    "question": "What is the purpose of the function f(array, k) in Reinforced_Self_Play_Reasoning?",
+    "answer": "The function f(array, k) finds the length of the longest subarray with at most k distinct characters (see Reinforced_Self_Play_Reasoning30, Clause 1)."
+  },
+  {
+    "question": "How does the function handle the case when the number of distinct characters in the current window exceeds k?",
+    "answer": "The function shrinks the window from the start by removing characters with a frequency of zero until the number of distinct characters is less than or equal to k (see Reinforced_Self_Play_Reasoning30, Clause 2)."
+  },
+  {
+    "question": "What is the initial value of max_length in the function f(array, k)?",
+    "answer": "The initial value of max_length is set to zero, representing the maximum window size encountered so far (see Reinforced_Self_Play_Reasoning30, Clause 3)."
+  },
+  {
+    "question": "How does the function update max_length during the iteration process?",
+    "answer": "max_length is updated by taking the maximum of its current value and the current window size (window_end - window_start + 1) (see Reinforced_Self_Play_Reasoning30, Clause 4)."
+  },
+  {
+    "question": "What is the condition for determining the output of the function f(array, k)?",
+    "answer": "The function returns the maximum window size encountered during the iteration process, which represents the length of the longest subarray with at most k distinct characters (see Reinforced_Self_Play_Reasoning30, Clause 5)."
+  },
+  {
+    "question": "What is the input provided to the function f(array, k)?",
+    "answer": "The input array [1, 2, 1, 2, 3, 2, 1] and k = 2 are provided to the function (see Reinforced_Self_Play_Reasoning30, Clause A.2)."
+  },
+  {
+    "question": "What is the output of the function f(array, k) for the given input?",
+    "answer": "The output of the function f(array, k) is four, representing the length of the longest subarray with at most two distinct characters (see Reinforced_Self_Play_Reasoning30, Clause 6)."
+  },
+  {
+    "question": "What is the purpose of sorting the input list before computing the final sum?",
+    "answer": "The sorted list allows for a straightforward calculation of the products, as each element's multiplier is determined by its position in the list (n −i), where n is the total number of elements (see Reinforced_Self_Play_Reasoning31, Clause 2)."
+  },
+  {
+    "question": "How does the function handle lists with duplicate elements?",
+    "answer": "The function treats each unique element in the sorted list as a separate entity and computes its product with the corresponding multiplier (n −i), without considering duplicates (see Reinforced_Self_Play_Reasoning31, Clause 3)."
+  },
+  {
+    "question": "What is the significance of the variable 'result' in the function?",
+    "answer": "The variable 'result' accumulates the sum of the products computed for each element in the sorted list, ultimately returning the final result (see Reinforced_Self_Play_Reasoning31, Clause 4)."
+  },
+  {
+    "question": "How does the function handle lists with only one element?",
+    "answer": "The function returns 0 for lists with only one element, as there is no multiplier to apply to that single element (see Reinforced_Self_Play_Reasoning31, Clause 5)."
+  },
+  {
+    "question": "What is the relationship between the input list and the output sum?",
+    "answer": "The output sum is calculated by multiplying each element in the sorted list by its corresponding multiplier (n −i) and then summing these products, effectively weighting each element's contribution to the total based on its position in the list (see Reinforced_Self_Play_Reasoning31, Clause 6)."
+  },
+  {
+    "question": "What is the purpose of the function f in Reinforced_Self_Play_Reasoning?",
+    "answer": "The function f is designed to find all pairs of numbers in a given list whose product equals a target product, as seen in the example with input [2, 3, 5, 7, 10] and target product 10 (see Reinforced_Self_Play_Reasoning33, Clause 1)."
+  },
+  {
+    "question": "How does the function f handle duplicate pairs?",
+    "answer": "The function f avoids duplicate pairs by only iterating over numbers that come after the current number in the outer loop (see Reinforced_Self_Play_Reasoning33, Clause 2)."
+  },
+  {
+    "question": "What is the output of the function f for the given input [2, 3, 5, 7, 10] and target product 10?",
+    "answer": "The output of the function f is a list containing the pair (2, 5), which satisfies the condition that the product of its elements equals the target product (see Reinforced_Self_Play_Reasoning33, Clause A.1)."
+  },
+  {
+    "question": "How does the function f iterate over pairs of numbers?",
+    "answer": "The function f uses nested loops to iterate over each pair of numbers in the input list, with the outer loop iterating over each number and the inner loop iterating over numbers that come after the current number (see Reinforced_Self_Play_Reasoning33, Clause 3)."
+  },
+  {
+    "question": "What is the condition for a pair to be added to the result list?",
+    "answer": "A pair is added to the result list if its product equals the target product (see Reinforced_Self_Play_Reasoning33, Clause 4)."
+  },
+  {
+    "question": "What is the purpose of the function f in Reinforced_Self_Play_Reasoning?",
+    "answer": "The function f checks if a string contains given substrings and returns True if the substring is found, False otherwise (see Reinforced_Self_Play_Reasoning34, Clause 1)."
+  },
+  {
+    "question": "How does the model input 'cookie' relate to the function f?",
+    "answer": "The model input 'cookie' is a string that does not contain the substring 'code', resulting in the output False (see Reinforced_Self_Play_Reasoning34, Clause 2)."
+  },
+  {
+    "question": "What is the effect of removing the initialization line 'curr_index = substring' on the function f?",
+    "answer": "Removing the initialization line does not affect the output of the function f, as it only initializes a variable and does not impact the logic (see Reinforced_Self_Play_Reasoning34, Clause 3)."
+  },
+  {
+    "question": "How does the slicing operation in the second line of code work?",
+    "answer": "The slicing operation assigns the substring from the input string to the left of index 0 and to the right of index len(substring), effectively checking if 'code' appears at the beginning of the input string (see Reinforced_Self_Play_Reasoning34, Clause 4)."
+  },
+  {
+    "question": "What is the reason for the output False despite the initial True assessment?",
+    "answer": "The output False is due to the fact that the first index of the input string 'cookie' does not exist, causing the function f to return False (see Reinforced_Self_Play_Reasoning34, Clause 5)."
+  },
+  {
+    "question": "What is the purpose of the metrics displayed in Figure 27?",
+    "answer": "The metrics display the performance of the Reasoner-Llama3.1-8b model on proposed tasks, showing an upward trend in program complexity and diversity across programs and answers (see Reinforced_Self_Play_Reasoning34, Clause A)."
+  },
+  {
+    "question": "What does the ComplexiPy Score indicate?",
+    "answer": "The ComplexiPy Score indicates the model's ability to solve output deduction tasks, with a value of 0.47 indicating moderate performance (see Reinforced_Self_Play_Reasoning34, Clause B)."
+  },
+  {
+    "question": "What is the Halstead Measure used for?",
+    "answer": "The Halstead Measure calculates the model's program complexity and diversity, showing an upward trend as training progresses (see Reinforced_Self_Play_Reasoning34, Clause C)."
+  },
+  {
+    "question": "How does the AST Edit Distance relate to the model's performance?",
+    "answer": "The AST Edit Distance measures the distance between the model's output and the correct answer, with a value of 0.99 indicating high accuracy (see Reinforced_Self_Play_Reasoning34, Clause D)."
+  },
+  {
+    "question": "What does the Answer Diversity indicate?",
+    "answer": "The Answer Diversity shows the model's ability to generate diverse answers, with an upward trend indicating improved performance as training progresses (see Reinforced_Self_Play_Reasoning34, Clause E)."
+  },
+  {
+    "question": "What is the purpose of Reinforced_Self_Play_Reasoning in relation to data availability?",
+    "answer": "Reinforced_Self_Play_Reasoning addresses the challenge of achieving absolute zero performance with limited or no data, providing a framework for reasoning and optimization (see Reinforced_Self_Play_Reasoning35, Clause 1)."
+  },
+  {
+    "question": "How do different benchmarks compare in terms of accuracy at 50 points?",
+    "answer": "The AIME 2024 benchmark achieves an accuracy of 0.050 at 50 points, while the LiveCodeBench benchmark achieves an accuracy of 0.300 at 50 points (see Reinforced_Self_Play_Reasoning35, Table 1)."
+  },
+  {
+    "question": "What is the expected performance range for the Math 500 benchmark?",
+    "answer": "The Math 500 benchmark is expected to achieve a performance range of 0.400 to 0.600 at 250 points (see Reinforced_Self_Play_Reasoning35, Table 2)."
+  },
+  {
+    "question": "How does the Minerva benchmark compare in terms of accuracy at 50 points?",
+    "answer": "The Minerva benchmark achieves an accuracy of 0.625 at 50 points, indicating a higher performance level than other benchmarks (see Reinforced_Self_Play_Reasoning35, Table 3)."
+  },
+  {
+    "question": "What is the overall average performance range for the Code Average benchmark?",
+    "answer": "The Code Average benchmark achieves an accuracy range of 0.420 to 0.480 at 250 points (see Reinforced_Self_Play_Reasoning35, Table 4)."
+  },
+  {
+    "question": "How does the HumanEval+ benchmark compare in terms of accuracy at 50 points?",
+    "answer": "The HumanEval+ benchmark achieves an accuracy of 0.660 at 50 points, indicating a high performance level (see Reinforced_Self_Play_Reasoning35, Table 5)."
+  },
+  {
+    "question": "What is the expected performance range for the MBPP+ benchmark?",
+    "answer": "The MBPP+ benchmark achieves an accuracy range of 0.240 to 0.280 at 50 points (see Reinforced_Self_Play_Reasoning35, Table 6)."
+  },
+  {
+    "question": "How does the LiveCodeBench benchmark compare in terms of accuracy at 75 points?",
+    "answer": "The LiveCodeBench benchmark achieves an accuracy of 0.300 at 75 points, indicating a moderate performance level (see Reinforced_Self_Play_Reasoning35, Table 7)."
+  },
+  {
+    "question": "What is the expected performance range for the Olympiad Bench benchmark?",
+    "answer": "The Olympiad Bench benchmark achieves an accuracy range of 0.280 to 0.380 at 50 points (see Reinforced_Self_Play_Reasoning35, Table 8)."
+  },
+  {
+    "question": "How does the AIME 2025 benchmark compare in terms of accuracy at 125 points?",
+    "answer": "The AIME 2025 benchmark achieves an accuracy of 0.325 at 125 points, indicating a high performance level (see Reinforced_Self_Play_Reasoning35, Table 9)."
+  },
+  {
+    "question": "What is the purpose of Reinforced_Self_Play_Reasoning in relation to absolute zero performance?",
+    "answer": "Reinforced_Self_Play_Reasoning aims to evaluate the performance of reasoners at absolute zero, addressing potential limitations and biases (see Reinforced_Self_Play_Reasoning36, Clause 1)."
+  },
+  {
+    "question": "How does Reinforced_Self_Play_Reasoning relate to different math reasoning benchmarks?",
+    "answer": "Reinforced_Self_Play_Reasoning assesses the performance of reasoners across various math reasoning benchmarks, including AIME 2024, AIME 2025, and others (see Reinforced_Self_Play_Reasoning36, Clause 2)."
+  },
+  {
+    "question": "What is the significance of accuracy in Reinforced_Self_Play_Reasoning?",
+    "answer": "Accuracy is a crucial aspect of Reinforced_Self_Play_Reasoning, as it evaluates the precision and reliability of reasoners' performance (see Reinforced_Self_Play_Reasoning36, Clause 3)."
+  },
+  {
+    "question": "How does Reinforced_Self_Play_Reasoning compare to other benchmarking methods?",
+    "answer": "Reinforced_Self_Play_Reasoning complements traditional benchmarking methods by addressing the limitations of reasoners at absolute zero (see Reinforced_Self_Play_Reasoning36, Clause A.2)."
+  },
+  {
+    "question": "What is the purpose of the Olympiad Bench in Reinforced_Self_Play_Reasoning?",
+    "answer": "The Olympiad Bench provides a standardized platform for evaluating reasoners' performance on specific math problems (see Reinforced_Self_Play_Reasoning36, Clause 4)."
+  },
+  {
+    "question": "How does Reinforced_Self_Play_Reasoning account for variations in human evaluation?",
+    "answer": "Reinforced_Self_Play_Reasoning incorporates human evaluation to assess the consistency and reliability of reasoners' performance (see Reinforced_Self_Play_Reasoning36, Clause 5)."
+  },
+  {
+    "question": "What is the significance of the Math 500 benchmark in Reinforced_Self_Play_Reasoning?",
+    "answer": "The Math 500 benchmark provides a comprehensive evaluation of reasoners' performance on a wide range of math problems (see Reinforced_Self_Play_Reasoning36, Clause 6)."
+  },
+  {
+    "question": "How does Reinforced_Self_Play_Reasoning relate to other benchmarking methods for code quality?",
+    "answer": "Reinforced_Self_Play_Reasoning complements traditional code quality benchmarking methods by addressing the limitations of reasoners at absolute zero (see Reinforced_Self_Play_Reasoning36, Clause A.2)."
+  },
+  {
+    "question": "What is the purpose of the LiveCodeBench in Reinforced_Self_Play_Reasoning?",
+    "answer": "The LiveCodeBench provides a platform for evaluating reasoners' performance on specific code-related tasks (see Reinforced_Self_Play_Reasoning36, Clause 7)."
+  },
+  {
+    "question": "How does Reinforced_Self_Play_Reasoning account for variations in human evaluation?",
+    "answer": "Reinforced_Self_Play_Reasoning incorporates human evaluation to assess the consistency and reliability of reasoners' performance (see Reinforced_Self_Play_Reasoning36, Clause 5)."
+  },
+  {
+    "question": "What is the significance of the Overall Average in Reinforced_Self_Play_Reasoning?",
+    "answer": "The Overall Average provides a comprehensive evaluation of reasoners' performance across multiple benchmarks and tasks (see Reinforced_Self_Play_Reasoning36, Clause 8)."
+  },
+  {
+    "question": "What is the purpose of Reinforced_Self_Play_Reasoning in relation to absolute zero?",
+    "answer": "Reinforced_Self_Play_Reasoning aims to improve performance at absolute zero conditions by providing a reasoning framework for mathematical and code-based approaches (see Reinforced_Self_Play_Reasoning37, Clause 1)."
+  },
+  {
+    "question": "How does the accuracy of different reasoners compare across various benchmarks?",
+    "answer": "The accuracy of reasoners varies significantly across different benchmarks, with some performing better than others in specific scenarios (see Reinforced_Self_Play_Reasoning37, Clause A.2)."
+  },
+  {
+    "question": "What is the significance of the 'Accuracy' section in Reinforced_Self_Play_Reasoning?",
+    "answer": "The 'Accuracy' section provides a comparison of different reasoners across various benchmarks, highlighting their strengths and weaknesses (see Reinforced_Self_Play_Reasoning37, Clause B.1)."
+  },
+  {
+    "question": "How does the performance of reasoners change with increasing difficulty levels?",
+    "answer": "The performance of reasoners generally improves as the difficulty level increases, but some reasoners perform better than others in specific scenarios (see Reinforced_Self_Play_Reasoning37, Clause C.1)."
+  },
+  {
+    "question": "What is the purpose of the 'Overall Average' section in Reinforced_Self_Play_Reasoning?",
+    "answer": "The 'Overall Average' section provides a comprehensive overview of the performance of reasoners across various benchmarks and difficulty levels (see Reinforced_Self_Play_Reasoning37, Clause D.1)."
+  },
+  {
+    "question": "How do different reasoners perform in comparison to each other?",
+    "answer": "Different reasoners perform differently across various benchmarks, with some performing better than others in specific scenarios (see Reinforced_Self_Play_Reasoning37, Clause E.1)."
+  },
+  {
+    "question": "What is the significance of the 'Math Average' and 'Code Average' sections?",
+    "answer": "The 'Math Average' and 'Code Average' sections provide a comparison of mathematical and code-based approaches across various benchmarks (see Reinforced_Self_Play_Reasoning37, Clause F.1)."
+  },
+  {
+    "question": "How does the performance of reasoners change with increasing difficulty levels in specific benchmarks?",
+    "answer": "The performance of reasoners generally improves as the difficulty level increases in specific benchmarks, but some reasoners perform better than others (see Reinforced_Self_Play_Reasoning37, Clause G.1)."
+  },
+  {
+    "question": "What is the purpose of the 'LiveCodeBench' and 'HumanEval+' sections?",
+    "answer": "The 'LiveCodeBench' and 'HumanEval+' sections provide a comparison of live code-based approaches and human evaluation methods across various benchmarks (see Reinforced_Self_Play_Reasoning37, Clause H.1)."
+  },
+  {
+    "question": "How do different reasoners perform in comparison to the 'AMC 2023' benchmark?",
+    "answer": "Different reasoners perform differently compared to the 'AMC 2023' benchmark, with some performing better than others in specific scenarios (see Reinforced_Self_Play_Reasoning37, Clause I.1)."
+  },
+  {
+    "question": "What is the significance of the 'Minerva' section?",
+    "answer": "The 'Minerva' section provides a comparison of different reasoners across various benchmarks and difficulty levels, highlighting their strengths and weaknesses (see Reinforced_Self_Play_Reasoning37, Clause J.1)."
+  },
+  {
+    "question": "What is the task instruction for the user?",
+    "answer": "The user's task instruction is not specified in the provided content (see Reinforced_Self_Play_Reasoning, Clause 3.1)"
+  },
+  {
+    "question": "Which template was used to train all the models?",
+    "answer": "All the models were trained using the default Deepseek R1 template (see Reinforced_Self_Play_Reasoning39, Figure 33)"
+  },
+  {
+    "question": "What is the primary goal of the program induction task?",
+    "answer": "The primary goal is to deduce the function that produced the outputs from the inputs, given a message describing the function."
+  },
+  {
+    "question": "How should the function be implemented?",
+    "answer": "The function should be deterministic and avoid random functions or variables, date/time operations, I/O operations, printing or logging, and any external state."
+  },
+  {
+    "question": "What is the constraint on the execution time of the function?",
+    "answer": "The function should complete within 10 seconds on a modern CPU."
+  },
+  {
+    "question": "How should imports and class definitions be handled?",
+    "answer": "All imports and class definitions should be at the very top of the code snippet."
+  },
+  {
+    "question": "What is the expected format of the entry function?",
+    "answer": "The entry function should be named `f` (e.g., `def f(...): ...`) and include at least one input parameter."
+  },
+  {
+    "question": "What is the purpose of the function ‘g_0‘ in the Sudoku solver?",
+    "answer": "The function ‘g_0‘ checks if a given board is valid, ensuring that each row, column, and 3x3 subgrid contains the digits 1 through 9 exactly once (see Reinforced_Self_Play_Reasoning46, Clause 2)."
+  },
+  {
+    "question": "What happens when the function ‘f‘ receives an input board with ”.”?",
+    "answer": "The function ‘f‘ raises a ‘ValueError‘ if there are any ”.” in the board, indicating that the input must be a complete board with no ”.” (see Reinforced_Self_Play_Reasoning46, Clause 3)."
+  },
+  {
+    "question": "How does the function ‘f‘ mask the input board?",
+    "answer": "The function ‘f‘ masks 51 random positions in the input board to produce the output (see Reinforced_Self_Play_Reasoning46, Clause 4)."
+  },
+  {
+    "question": "What is the goal of the Sudoku solver model?",
+    "answer": "The model aims to infer the original input from a masked board by simulating the masking process and solving the puzzle backwards."
+  },
+  {
+    "question": "How does the model generate solutions for the Sudoku puzzle?",
+    "answer": "The model uses generation parameters such as temperature=0.6 to simulate the masking process and produce output (see Reinforced_Self_Play_Reasoning46, Clause 5)."
+  },
+  {
+    "question": "What is the purpose of the function `g_3()` in Reinforced_Self_Play_Reasoning?",
+    "answer": "The function `g_3()` generates all pairs of integers `(x, y)` such that `x + y <= 100` and returns them as a list (see Reinforced_Self_Play_Reasoning47, Clause 1)."
+  },
+  {
+    "question": "How does the function `g_2(pairs)` group pairs by their sum in Reinforced_Self_Play_Reasoning?",
+    "answer": "The function `g_2(pairs)` groups pairs by their sum and returns a dictionary where each key is a unique sum and each value is a list of pairs that have that sum (see Reinforced_Self_Play_Reasoning47, Clause 2)."
+  },
+  {
+    "question": "What does the function `g_1(pairs)` calculate in Reinforced_Self_Play_Reasoning?",
+    "answer": "The function `g_1(pairs)` calculates the product of each pair and returns a dictionary where each key is a unique product and each value is a list of pairs that have that product (see Reinforced_Self_Play_Reasoning47, Clause 3)."
+  },
+  {
+    "question": "What is the purpose of the `sum_dict` in Reinforced_Self_Play_Reasoning?",
+    "answer": "The `sum_dict` is a dictionary that groups pairs by their sum and contains information about the number of candidate pairs for each sum (see Reinforced_Self_Play_Reasoning47, Clause 4)."
+  },
+  {
+    "question": "How does the `allowed_sums` list in Reinforced_Self_Play_Reasoning relate to the `sum_dict`?",
+    "answer": "The `allowed_sums` list contains sums that have more than one candidate pair and are therefore considered valid (see Reinforced_Self_Play_Reasoning47, Clause 5)."
+  },
+  {
+    "question": "What is the purpose of the `new_prod_dict` in Reinforced_Self_Play_Reasoning?",
+    "answer": "The `new_prod_dict` is a dictionary that calculates the product of each pair after filtering by allowed sums and contains information about the number of unique products (see Reinforced_Self_Play_Reasoning47, Clause 6)."
+  },
+  {
+    "question": "How does the `final_candidates` list in Reinforced_Self_Play_Reasoning relate to the `new_prod_dict`?",
+    "answer": "The `final_candidates` list contains pairs that have a unique product and are therefore considered valid (see Reinforced_Self_Play_Reasoning47, Clause 7)."
+  },
+  {
+    "question": "What is the purpose of the function `f(x, y)` in Reinforced_Self_Play_Reasoning?",
+    "answer": "The function `f(x, y)` checks if a pair `(x, y)` meets certain conditions and returns True if it does (see Reinforced_Self_Play_Reasoning47, Clause 8)."
+  },
+  {
+    "question": "How does the function `g_0()` in Reinforced_Self_Play_Reasoning relate to the other functions?",
+    "answer": "The function `g_0()` is a composite function that calls several other functions and returns a list of valid pairs (see Reinforced_Self_Play_Reasoning47, Clause 9)."
+  },
+  {
+    "question": "What are the conditions for a pair (x, y) to be considered valid in the function f(x, y)?",
+    "answer": "A pair (x, y) is valid if both x and y are integers, 1 < x < y, and x + y <= 100. Additionally, after applying the conditions in g_0, the final candidates must be exactly one pair, which is (x, y). (see Reinforced_Self_Play_Reasoning48, Clause A.2)"
+  },
+  {
+    "question": "What is the purpose of the function g_3()?",
+    "answer": "The function g_3() generates all pairs (x, y) such that 2 <= x < y <= 100 and x + y <= 100. (see Reinforced_Self_Play_Reasoning48, Clause A.1)"
+  },
+  {
+    "question": "How does the function sum_dict relate to the problem?",
+    "answer": "The function sum_dict creates a dictionary where the keys are the sums of the pairs and the values are lists of pairs that add up to that sum. (see Reinforced_Self_Play_Reasoning48, Clause B.1)"
+  },
+  {
+    "question": "What is the purpose of filtering out pairs with more than one pair having the same product?",
+    "answer": "The filter removes sums s for which all pairs (x, y) that add up to s have more than one pair with the same product. This ensures that only unique products are considered. (see Reinforced_Self_Play_Reasoning48, Clause B.2)"
+  },
+  {
+    "question": "What is the purpose of the function g_1(candidates_after_S)?",
+    "answer": "The function g_1(candidates_after_S) creates a new product dictionary using the filtered pairs. (see Reinforced_Self_Play_Reasoning48, Clause B.3)"
+  },
+  {
+    "question": "How does the function unique_products relate to the problem?",
+    "answer": "The function unique_products creates a dictionary of products that have exactly one pair. This is used to identify valid pairs. (see Reinforced_Self_Play_Reasoning48, Clause B.4)"
+  },
+  {
+    "question": "What is the purpose of the loop in the function f(x, y)?",
+    "answer": "The loop iterates over each sum in allowed_sums and checks if there is exactly one pair (x, y) such that x + y = s and x * y is in unique_products. If so, this pair is added to final_candidates. (see Reinforced_Self_Play_Reasoning48, Clause B.5)"
+  },
+  {
+    "question": "What is the output of the function f(x, y) if there is exactly one valid pair?",
+    "answer": "The function returns True if there is exactly one pair that satisfies all conditions, indicating a solution to the problem. (see Reinforced_Self_Play_Reasoning48, Clause B.6)"
+  },
+  {
+    "question": "What is the input that produced the output True in the Sum-Product Game?",
+    "answer": "(4, 13)"
+  },
+  {
+    "question": "What is the purpose of the Error Deduction Task in Reinforced Self-play Reasoning?",
+    "answer": "The Error Deduction Task involves allowing the learner to propose a program that will produce an error, and requiring the solver to deduce what kind of error is raised when executing this code (see Reinforced_Self_Play_Reasoning49, Clause D.1)."
+  },
+  {
+    "question": "How does Composite Functions as Curriculum Learning work in Reinforced Self-play Reasoning?",
+    "answer": "Composite Functions as Curriculum Learning involves constraining the LLM to utilize a predefined set of programs within its main function, allowing it to bootstrap from earlier generations and increase program complexity (see Reinforced_Self_Play_Reasoning49, Clause D.2)."
+  },
+  {
+    "question": "What is the effect of using Composite Functions as Curriculum Learning in Reinforced Self-play Reasoning?",
+    "answer": "Using Composite Functions as Curriculum Learning did not observe a significant difference in performance compared to the simpler approach, but it may be possible to design a stricter reward mechanism to enforce meaningful composition (see Reinforced_Self_Play_Reasoning49, Clause D.2)."
+  },
+  {
+    "question": "What was found when using an initial seed buffer sourced from the LeetCode Dataset in Reinforced Self-play Reasoning?",
+    "answer": "Using an initial seed buffer sourced from the LeetCode Dataset resulted in an increase in initial performance on coding benchmarks, but the performance plateaued at roughly the same level after additional training steps (see Reinforced_Self_Play_Reasoning49, Clause D.3)."
+  },
+  {
+    "question": "What type of rewards were explored in Reinforced Self-play Reasoning?",
+    "answer": "Extra Rewards included Complexity Rewards, such as using measures of complexity like Cyclomatic Complexity or Maintainability to incentivize the proposer to produce more complex programs (see Reinforced_Self_Play_Reasoning49, Clause D.4)."
+  },
+  {
+    "question": "What is the complexity measure used as intrinsic rewards for Absolute Zero Reinforced Self-Play Reasoning?",
+    "answer": "The complexity measure used is based on Halstead's (1977) formula, implemented using the complexipy and Radon packages."
+  },
+  {
+    "question": "How do diversity rewards work in Absolute Zero Reinforced Self-Play Reasoning?",
+    "answer": "Diversity rewards are calculated by computing the average code edit distance between generated programs and reference programs, serving as a measure of diversity in the output."
+  },
+  {
+    "question": "What is the approach to combining extrinsic and intrinsic rewards in Absolute Zero Reinforced Self-Play Reasoning?",
+    "answer": "The simple additive way of combining rewards (Equation 11) produced the most stable runs, possibly due to less variance."
+  },
+  {
+    "question": "Why was removing comments and docstrings from generated code observed to cause a significant performance drop?",
+    "answer": "Removing comments and docstrings restricted communication channels between the proposer and solver, potentially providing hints for solvers to learn from their experience."
+  },
+  {
+    "question": "What is the issue with globally declared variables in generated programs that may lead to wasted computation?",
+    "answer": "Globally declared variables may inadvertently leak information about correct answers, potentially leading to wasted computation on trivial or compromised examples."
+  },
+  {
+    "question": "Why was removing globally declared variables from generated programs observed to cause a noticeable drop in performance?",
+    "answer": "The generation step may not learn effectively from the mismatch between variable removal and reward assignment, which can impact model learning."
+  },
+  {
+    "question": "What is the idea of rationalization proposed by STaR (Zelikman et al., 2022) that relates to Absolute Zero Reinforced Self-Play Reasoning?",
+    "answer": "The model pretends not to see the answer but still performs reasoning during learning, aligning with the exposure to globally declared variables."
+  }
+]
