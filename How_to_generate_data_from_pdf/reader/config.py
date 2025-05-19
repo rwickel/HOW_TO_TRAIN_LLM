@@ -11,7 +11,7 @@ class AppConfig:
     # System prompt for the LLM, instructing it on how to process the PDF content
     # and the desired output format (JSON array of Q&A pairs).
     system_prompt: str = (
-        "You are an expert PDF reader designed to extract and convert content from the ISO document {filename} page {page} "
+        "You are an expert PDF reader designed to extract and convert content from the document {filename} page {page} "
         "into a structured list of multiple question-and-answer (Q&A) pairs. Your role is to deeply understand each section "
         "and produce technically accurate, well-referenced Q&A pairs for each relevant part.\n\n"
 
@@ -28,12 +28,12 @@ class AppConfig:
         "Format example:\n"
         "[\n"
         "  {{\n"
-        "    \"question\": \"What is the scope of {filename}?\",\n"
-        "    \"answer\": \"{filename} focuses on the safety of the intended functionality of road vehicles and addresses potential hazards from insufficient specification or performance (see {filename}{page}, Clause 1).\"\n"
+        "    \"question\": \"What is the scope of ISO 21448 ?\",\n"
+        "    \"answer\": \"ISO 21448 focuses on the safety of the intended functionality of road vehicles and addresses potential hazards from insufficient specification or performance (see {filename} page:{page}, Clause 1).\"\n"
         "  }},\n"
         "  {{\n"
-        "    \"question\": \"How does {filename} relate to other automotive safety standards?\",\n"
-        "    \"answer\": \"{filename} complements ISO 26262 by addressing safety concerns not caused by hardware or software faults, but by performance limitations or misuse (see {filename}{page}, Clause A.2).\"\n"
+        "    \"question\": \"How does ISO 21448 relate to other automotive safety standards?\",\n"
+        "    \"answer\": \"ISO 21448 complements ISO 26262 by addressing safety concerns not caused by hardware or software faults, but by performance limitations or misuse (see {filename} page: {page}, Clause A.2).\"\n"
         "  }}\n"
         "]\n\n"
 
@@ -62,22 +62,7 @@ class AppConfig:
 
     # A list of text strings to be excluded from the PDF content before processing.
     exclude_text: List[str] = field(default_factory=lambda: [
-        "© ISO 2022",
-        "© ISO 2022 – All rights reserved",
-        "Normen-Download-DIN Media-Robert Wickel-KdNr.8450525-ID.XEKoxl0127MPxe2YrRrlTXYDJGWZtEpnSwYwINY1-2025-03-31 10:21:30",
-        "COPYRIGHT PROTECTED DOCUMENT",
-        "All rights reserved. Unless otherwise specified, or required in the context of its implementation, no part of this publication may",
-        "be reproduced or utilized otherwise in any form or by any means, electronic or mechanical, including photocopying, or posting on",
-        "the internet or an intranet, without prior written permission. Permission can be requested from either ISO at the address below",
-        "or ISO’s member body in the country of the requester.",
-        "ISO copyright office",
-        "CP 401 • Ch. de Blandonnet 8",
-        "CH-1214 Vernier, Geneva",
-        "Phone: +41 22 749 01 11",
-        "Email: copyright@iso.org",
-        "Website: www.iso.org",
-        "Published in Switzerland",
-        "ISO 21448:2022(E)"
+        
     ])
 
     # Default path to the PDF file that needs to be processed.
