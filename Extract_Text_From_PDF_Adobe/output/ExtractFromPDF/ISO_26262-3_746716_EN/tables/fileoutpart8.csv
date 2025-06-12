@@ -1,0 +1,15 @@
+﻿Severity class  ,Exposure class  ,Controllability class  
+,,C1  ,C2  ,C3  
+S1  ,E1  ,QM  ,QM  ,QM  
+,E2  ,QM  ,QM  ,QM  
+,E3  ,QM  ,QM  ,A  
+,E4  ,QM  ,A  ,B  
+S2  ,E1  ,QM  ,QM  ,QM  
+,E2  ,QM  ,QM  ,A  
+,E3  ,QM  ,A  ,B  
+,E4  ,A  ,B  ,C  
+S3  ,E1  ,QM  ,QM  ,Aa  
+,E2  ,QM  ,A  ,B  
+,E3  ,A  ,B  ,C  
+,E4  ,B  ,C  ,D  
+a See 6.4.3.11.  ,,,,

@@ -1,0 +1,12 @@
+﻿,,Class of probability of exposure in operational situations (see Table 2)  
+,,E1  ,E2  ,E3  ,E4  
+Description  ,,Very low probability  ,Low proba-bility  ,Medium probability  ,High proba-bility  
+Frequency of situation  ,,Occurs less often than once a year for the great majority of drivers  ,for the great majority of  Occurs a few times a year  drivers  ,Occurs once a month or more often for an aver-age driver  ,Occurs dur-ing almost every drive on average  
+Examples for  ,driving in reverse  ,—  ,—  ,CB  ,"LH, DI, VO, CO, IB  "
+,overtaking another truck or bus with small speed difference (with lane change to oncoming lane)  ,—  ,—  ,"LH, DI, VO, CO, IB  ",—  
+,driving with trailer attached  ,—  ,—  ,"DI, CO, IB  ","LH, VO  "
+,semi-trailer tractor without trailer attached (on public road)  ,—  ,"DI, VO  ",LH  ,—  
+,"driving on construction site (vehicle is driving directly on construction site, not only for delivering goods to construc-tion site)  ",LH  ,DI  ,—  ,VO  
+,steep slope  ,"LH, CB  ","DI, CO, IB  ",—  ,VO  
+,standing at/entering/driving off a bus stop  ,—  ,—  ,—  ,"CB, CO, IB  "
+"NOTE The informative examples in Table B.3 can be applied to T&B, but are considered on a case by case basis. For situations occurring in both Table B.3 and Table B.5, Table B.5 is considered more appropriate for T&B.  "

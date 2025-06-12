@@ -1,0 +1,6 @@
+﻿,Class of controllability (see Table 3)  
+,C0  ,C1  ,C2  ,C3  
+Description  ,Controllable in general  ,Simply controllable  ,Normally control-lable  ,Difficult to control or uncontrollable  
+Example for faulty driver airbag release when trav-elling at high speed  ,—  ,—  ,—  ,"Maintain intended driving path, stay in lane, or  brake to slow/stop vehicle  "
+Example for excessive trailer swing during braking potential for jacknifing  ,—  ,—  ,—  ,Driver coun-ter-steers and brakes in an at-tempt to maintain intended driving path  
+Example for function with high automation where driver is not in the loop  ,—  ,—  ,—  ,No attempt to maintain intended driving path  

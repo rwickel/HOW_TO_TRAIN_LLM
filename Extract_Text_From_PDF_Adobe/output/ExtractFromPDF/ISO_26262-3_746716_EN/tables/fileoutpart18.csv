@@ -1,0 +1,13 @@
+﻿,Class of controllability (see Table 3)  
+,C0  ,C1  ,C2  ,C3  
+Description  ,Controllable in general  ,Simply controllable  ,Normally control-lable  ,Difficult to control or uncontrollable  
+Driving factors and sce-narios  ,Controllable in general  ,More than 99 % of the average drivers or other traffic par-ticipants are able to avoid harm  ,Between 90 % an 99 % of the average drivers or other traffic par-ticipants are able to avoid harm  ,Less than 90 % of the average drivers or other traffic par-ticipants are able to avoid harm  
+Example situations that are considered distract-ing e.g. unexpected radio volume increase or warn-ing message - fuel low  ,Maintain intended driving path  ,—  ,—  ,—  
+Example for unavailabil-ity of a driver assisting system that does not affect the safe operation of the vehicle  ,Maintain intended driving path  ,—  ,—  ,—  
+Example for unintended closing of window while driving  ,—  ,Remove arm from window  ,—  ,—  
+Example for blocked steering column when ac-celerating from standstill  ,—  ,Brake to slow/stop vehicle  ,—  ,—  
+Example for failure of ABS during emergency braking  ,—  ,—  ,Maintain intended driving path  ,
+Example for propulsion failure at high lateral acceleration  ,—  ,—  ,Maintain intended driving path  ,—  
+Example for inadvertent opening bus door while driving with passenger standing in doorway  ,—  ,—  ,Passenger grabs hand rail to avoid falling out of bus  ,—  
+Example for failure of brakes  ,—  ,—  ,—  ,Steer away from objects in driving path  
+"NOTE 1   For C2, a feasible test scenario in accordance with RESPONSE 3 (see Reference [4]) is accepted as adequate: “Practical testing experience revealed that a number of 20 valid data sets per scenario can supply a basic indication of validity”. If each of the 20 data sets complies with the pass-criteria for the test, a level of controllability of 85 % (with a level of confidence of 95 % which is generally accepted for human factors tests) can be proven. This is appropriate evidence of the rationale for a C2-estimate.  "
